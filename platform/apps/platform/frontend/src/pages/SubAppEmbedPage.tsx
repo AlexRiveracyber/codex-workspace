@@ -17,7 +17,7 @@ interface SubAppEmbedPageProps {
 export const SubAppEmbedPage: React.FC<SubAppEmbedPageProps> = ({ appType }) => {
   const configs: Record<string, SubAppConfig> = {
     task: {
-      name: 'Task Studio',
+      name: 'Task Flow',
       subTitle: 'apps/task (Port 3002)',
       desc: '商户进件与聚合支付中枢',
       url: 'http://localhost:3002',
@@ -25,7 +25,7 @@ export const SubAppEmbedPage: React.FC<SubAppEmbedPageProps> = ({ appType }) => 
       accentColor: 'text-emerald-400',
     },
     ai: {
-      name: 'AI Studio',
+      name: 'Lumen AI',
       subTitle: 'apps/ai (Port 3003)',
       desc: '大模型与多模态创作中心',
       url: 'http://localhost:3003',
@@ -33,7 +33,7 @@ export const SubAppEmbedPage: React.FC<SubAppEmbedPageProps> = ({ appType }) => 
       accentColor: 'text-purple-400',
     },
     tool: {
-      name: 'DevTools Studio',
+      name: 'Toolbox',
       subTitle: 'apps/tool (Port 3004)',
       desc: '全能开发者研发工具箱',
       url: 'http://localhost:3004',

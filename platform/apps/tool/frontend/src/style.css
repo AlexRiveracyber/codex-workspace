@@ -4,10 +4,89 @@
 
 @layer base {
   body {
-    background-color: #f8fafc;
+    margin: 0;
+    background-color: #dfe2dc;
     color: #1e293b;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
+}
+
+/* Toolbox — a crisp, high-contrast developer utility deck. */
+.tool-workbench {
+  --tool-ink: #151816;
+  --tool-acid: #dfff64;
+  --tool-orange: #ff7657;
+  --tool-paper: #eef0eb;
+  min-height: 100vh;
+  background: var(--tool-paper) !important;
+}
+.tool-topbar {
+  height: 72px !important;
+  padding-inline: 22px !important;
+  border: 0 !important;
+  background: var(--tool-ink) !important;
+  box-shadow: none !important;
+}
+.tool-topbar > div:first-child > button { border-color: #3b403c !important; border-radius: 3px !important; background: #222622 !important; color: #c8cec8 !important; }
+.tool-brand-mark { width: 39px !important; height: 39px !important; border: 0 !important; border-radius: 3px !important; background: var(--tool-acid) !important; color: #151816 !important; transform: rotate(-2deg); }
+.tool-eyebrow { margin-bottom: 2px; color: #818981; font: 600 8px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; }
+.tool-title { color: #f5f7f1 !important; font-size: 17px !important; letter-spacing: -.02em; }
+.tool-wordmark span { border-color: #3a403a !important; border-radius: 2px !important; background: #242824 !important; color: #b9c0b9 !important; }
+.tool-status { border-color: #3b413b !important; border-radius: 3px !important; background: #222622 !important; }
+.tool-status .text-slate-500 { color: #8d958e !important; }
+.tool-status .text-emerald-700 { color: var(--tool-acid) !important; }
+.tool-platform-link { border-color: #3b413b !important; border-radius: 3px !important; background: #292e29 !important; color: #e2e7e1 !important; }
+.tool-platform-link:hover { background: var(--tool-acid) !important; color: #151816 !important; }
+
+.tool-layout { padding: 0 !important; gap: 0 !important; }
+.tool-rail {
+  width: 250px !important;
+  padding: 22px 14px !important;
+  border: 0 !important;
+  border-right: 1px solid #353a35 !important;
+  border-radius: 0 !important;
+  background: #1c201c !important;
+  box-shadow: none !important;
+}
+.tool-rail.w-14 { width: 68px !important; }
+.tool-rail .uppercase { color: #707870 !important; letter-spacing: .17em !important; }
+.tool-rail button { min-height: 40px; border-radius: 3px !important; }
+.tool-rail button.bg-blue-50 { border-color: var(--tool-acid) !important; background: var(--tool-acid) !important; color: #171a17 !important; box-shadow: 4px 4px 0 #56651e !important; }
+.tool-rail button.bg-blue-50 svg { color: #171a17 !important; }
+.tool-rail button.text-slate-600 { color: #a9b0aa !important; }
+.tool-rail button.text-slate-600:hover { background: #2a302a !important; color: #fff !important; }
+.tool-rail > div:last-child { border-color: #373d37 !important; background: #242924 !important; color: #919991 !important; }
+.tool-rail > div:last-child .text-slate-800 { color: #eef2ec !important; }
+.tool-rail > div:last-child .text-blue-600 { color: var(--tool-acid) !important; }
+
+.tool-main { padding: 26px clamp(18px, 3vw, 42px) 50px !important; }
+.tool-deck-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 3px solid var(--tool-ink); }
+.tool-deck-index { display: block; margin-bottom: 7px; color: #646b64; font: 700 9px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; }
+.tool-deck-header h2 { margin: 0; color: var(--tool-ink); font-size: clamp(25px, 3vw, 38px); line-height: .98; letter-spacing: -.045em; }
+.tool-deck-header p { margin: 8px 0 0; color: #656c65; font: 500 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+.tool-deck-icon { width: 42px; height: 42px; padding: 9px; border: 2px solid var(--tool-ink); background: var(--tool-orange); color: var(--tool-ink); }
+
+.tool-workbench .bg-white { background-color: #f9faf6 !important; }
+.tool-workbench .tool-rail { background: #1c201c !important; }
+.tool-workbench .border-slate-200 { border-color: #c9cdc5 !important; }
+.tool-workbench .rounded-xl { border-radius: 5px !important; }
+.tool-main .bg-white { box-shadow: 4px 4px 0 rgba(21,24,22,.13) !important; }
+.tool-main .bg-slate-100 { background-color: #d9ddd5 !important; }
+.tool-main .bg-slate-50 { background-color: #eef0eb !important; }
+.tool-main .bg-blue-600 { background-color: var(--tool-ink) !important; color: var(--tool-acid) !important; }
+.tool-main .hover\:bg-blue-700:hover { background-color: #343a34 !important; }
+.tool-main .text-blue-600, .tool-main .text-blue-700 { color: #394f00 !important; }
+.tool-main .border-blue-200 { border-color: #a9b77a !important; }
+.tool-main .bg-blue-50 { background-color: #efffc0 !important; }
+.tool-main input:focus, .tool-main textarea:focus, .tool-main select:focus { border-color: #596d18 !important; box-shadow: 0 0 0 3px rgba(130,157,42,.16); }
+
+@media (max-width: 760px) {
+  .tool-topbar { height: 66px !important; padding-inline: 12px !important; }
+  .tool-status { display: none !important; }
+  .tool-rail { width: 68px !important; padding-inline: 8px !important; }
+  .tool-rail > div > div:first-child, .tool-rail button > div { display: none !important; }
+  .tool-main { padding: 18px 12px 36px !important; }
+  .tool-deck-header p { max-width: 230px; }
 }
 
 /* Custom smooth light scrollbars */

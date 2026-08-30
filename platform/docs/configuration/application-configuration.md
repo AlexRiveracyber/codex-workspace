@@ -11,8 +11,8 @@
 | `MYSQL_PORT` | `3306` | MySQL 暴露到宿主机的端口 |
 | `PLATFORM_API_PORT` | `8090` | 主平台 API 端口 |
 | `PLATFORM_UI_PORT` | `3100` | 主控制台端口 |
-| `TASK_API_PORT` / `TASK_UI_PORT` | `8082` / `3002` | Task Studio 后端与界面端口 |
-| `AI_API_PORT` / `AI_UI_PORT` | `8083` / `3003` | AI Studio 后端与界面端口 |
+| `TASK_API_PORT` / `TASK_UI_PORT` | `8082` / `3002` | Task Flow 后端与界面端口 |
+| `AI_API_PORT` / `AI_UI_PORT` | `8083` / `3003` | Lumen AI 后端与界面端口 |
 | `TOOL_API_PORT` / `TOOL_UI_PORT` | `8084` / `3004` | DevTools 后端与界面端口 |
 
 ## 后端数据库参数

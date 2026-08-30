@@ -93,7 +93,7 @@ interface CategoryGroup {
 
 export const App: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
-    return localStorage.getItem('task_sidebar_collapsed') === 'true';
+    return window.innerWidth < 900 || localStorage.getItem('task_sidebar_collapsed') === 'true';
   });
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -1798,9 +1798,9 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-slate-800 font-sans flex flex-col selection:bg-blue-500 selection:text-white">
+    <div className="task-console min-h-screen bg-[#f8fafc] text-slate-800 font-sans flex flex-col selection:bg-blue-500 selection:text-white">
       {/* Top Navbar */}
-      <header className="h-14 border-b border-slate-200 bg-white px-4 md:px-6 flex items-center justify-between sticky top-0 z-40 shrink-0 shadow-xs">
+      <header className="task-topbar h-14 border-b border-slate-200 bg-white px-4 md:px-6 flex items-center justify-between sticky top-0 z-40 shrink-0 shadow-xs">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-3">
             <button
@@ -1815,15 +1815,16 @@ export const App: React.FC = () => {
               )}
             </button>
 
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500/15 to-indigo-600/25 border border-blue-500/30 flex items-center justify-center text-blue-600 font-bold shadow-xs">
+            <div className="task-wordmark flex items-center gap-2.5">
+              <div className="task-brand-mark w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500/15 to-indigo-600/25 border border-blue-500/30 flex items-center justify-center text-blue-600 font-bold shadow-xs">
                 <Layers className="w-4 h-4" />
               </div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-sm font-bold text-slate-900 tracking-tight">Task Studio</h1>
-                <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-500 border border-slate-200 font-mono">
-                  v2.0
-                </span>
+              <div>
+                <div className="task-eyebrow">PAYMENT OPERATIONS / WORKFLOW</div>
+                <div className="flex items-center gap-2">
+                  <h1 className="task-title text-sm font-bold text-slate-900 tracking-tight">Task Flow</h1>
+                  <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-500 border border-slate-200 font-mono">OPS</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1831,8 +1832,8 @@ export const App: React.FC = () => {
 
         <div className="flex items-center gap-3">
           {/* Active Merchant Selector and Management */}
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs shadow-2xs">
+          <div className="task-merchant-tools flex items-center gap-2">
+            <div className="task-merchant-select flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs shadow-2xs">
               <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
               <span className="text-slate-500 text-[11px] whitespace-nowrap">当前调测商户:</span>
               <select
@@ -1868,7 +1869,7 @@ export const App: React.FC = () => {
             href="http://localhost:3100"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-300 transition cursor-pointer"
+            className="task-platform-link flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-300 transition cursor-pointer"
           >
             <LayoutGrid className="w-3.5 h-3.5" />
             <span className="hidden md:inline">Platform (3100)</span>
@@ -1877,10 +1878,10 @@ export const App: React.FC = () => {
       </header>
 
       {/* Main Container */}
-      <div className="flex-1 flex w-full p-3 md:p-4 gap-4 overflow-hidden">
+      <div className="task-workspace flex-1 flex w-full p-3 md:p-4 gap-4 overflow-hidden">
         {/* Left Sidebar */}
         <aside
-          className={`border border-slate-200 bg-white rounded-xl py-3 flex flex-col justify-between transition-all duration-200 shrink-0 select-none shadow-xs overflow-hidden ${
+          className={`task-directory border border-slate-200 bg-white rounded-xl py-3 flex flex-col justify-between transition-all duration-200 shrink-0 select-none shadow-xs overflow-hidden ${
             sidebarCollapsed ? 'w-16 px-1.5 items-center' : 'w-72 px-2'
           }`}
         >
@@ -2055,7 +2056,7 @@ export const App: React.FC = () => {
         </aside>
 
         {/* Right Main Content Area */}
-        <main className="flex-1 min-w-0 overflow-y-auto space-y-4 pr-1 pb-24">
+        <main className="task-main flex-1 min-w-0 overflow-y-auto space-y-4 pr-1 pb-24">
           {/* Official API Header Card */}
           <div className="doc-card p-5 rounded-xl bg-white space-y-3">
             <div className="flex items-center justify-between flex-wrap gap-3">

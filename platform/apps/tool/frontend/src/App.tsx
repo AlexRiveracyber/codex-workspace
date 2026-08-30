@@ -28,7 +28,7 @@ import { SnippetManager } from './components/SnippetManager';
 
 export const App: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
-    return localStorage.getItem('devtools_sidebar_collapsed') === 'true';
+    return window.innerWidth < 760 || localStorage.getItem('devtools_sidebar_collapsed') === 'true';
   });
   const [activeCategory, setActiveCategory] = useState('codec');
 
@@ -52,10 +52,12 @@ export const App: React.FC = () => {
     { id: 'snippets', label: '代码片段管理', desc: '个人常用代码库与模版持久化', icon: Bookmark },
   ];
 
+  const currentCategory = navCategories.find((item) => item.id === activeCategory) || navCategories[0];
+
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-slate-800 font-sans flex flex-col selection:bg-blue-500 selection:text-white">
+    <div className="tool-workbench min-h-screen bg-[#f8fafc] text-slate-800 font-sans flex flex-col selection:bg-blue-500 selection:text-white">
       {/* Top Navbar */}
-      <header className="h-14 border-b border-slate-200 bg-white/95 backdrop-blur-md px-4 flex items-center justify-between sticky top-0 z-40 shrink-0 shadow-xs">
+      <header className="tool-topbar h-14 border-b border-slate-200 bg-white/95 backdrop-blur-md px-4 flex items-center justify-between sticky top-0 z-40 shrink-0 shadow-xs">
         <div className="flex items-center gap-3">
           <button
             onClick={toggleSidebar}
@@ -69,15 +71,16 @@ export const App: React.FC = () => {
             )}
           </button>
 
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 font-bold shadow-xs">
+          <div className="tool-wordmark flex items-center gap-2.5">
+            <div className="tool-brand-mark w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 font-bold shadow-xs">
               <Wrench className="w-4 h-4" />
             </div>
             <div>
+              <div className="tool-eyebrow">PLATFORM / UTILITY DECK</div>
               <div className="flex items-center gap-2">
-                <h1 className="text-sm font-bold text-slate-900 tracking-tight">DevTools Studio</h1>
+                <h1 className="tool-title text-sm font-bold text-slate-900 tracking-tight">Toolbox</h1>
                 <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200 font-mono font-semibold">
-                  v2.0
+                  09 DECKS
                 </span>
               </div>
             </div>
@@ -86,7 +89,7 @@ export const App: React.FC = () => {
 
         {/* Status */}
         <div className="flex items-center gap-2.5">
-          <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-white border border-slate-200 shadow-xs text-xs">
+          <div className="tool-status hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-white border border-slate-200 shadow-xs text-xs">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-slate-500 text-[11px]">API 8084:</span>
             <span className="font-mono text-emerald-700 font-semibold text-[11px]">Online</span>
@@ -96,7 +99,7 @@ export const App: React.FC = () => {
             href="http://localhost:3100"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition cursor-pointer"
+            className="tool-platform-link flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition cursor-pointer"
           >
             <LayoutGrid className="w-3.5 h-3.5" />
             <span className="hidden md:inline">Platform (3100)</span>
@@ -105,10 +108,10 @@ export const App: React.FC = () => {
       </header>
 
       {/* Main Container */}
-      <div className="flex-1 flex w-full p-3 md:p-4 gap-3 md:gap-4 overflow-hidden">
+      <div className="tool-layout flex-1 flex w-full p-3 md:p-4 gap-3 md:gap-4 overflow-hidden">
         {/* Left Category Sidebar */}
         <aside
-          className={`border border-slate-200 bg-white rounded-xl py-3 px-2 flex flex-col justify-between transition-all duration-200 shrink-0 select-none overflow-y-auto shadow-xs ${
+          className={`tool-rail border border-slate-200 bg-white rounded-xl py-3 px-2 flex flex-col justify-between transition-all duration-200 shrink-0 select-none overflow-y-auto shadow-xs ${
             sidebarCollapsed ? 'w-14 items-center' : 'w-56'
           }`}
         >
@@ -165,7 +168,15 @@ export const App: React.FC = () => {
         </aside>
 
         {/* Content Area (Maximized space for laptops) */}
-        <main className="flex-1 min-w-0 overflow-y-auto">
+        <main className="tool-main flex-1 min-w-0 overflow-y-auto">
+          <div className="tool-deck-header">
+            <div>
+              <span className="tool-deck-index">DECK {String(navCategories.findIndex((item) => item.id === activeCategory) + 1).padStart(2, '0')}</span>
+              <h2>{currentCategory.label}</h2>
+              <p>{currentCategory.desc}</p>
+            </div>
+            <currentCategory.icon className="tool-deck-icon" />
+          </div>
           {activeCategory === 'codec' && <CodecTools />}
           {activeCategory === 'crypto' && <CryptoTools />}
           {activeCategory === 'format_code' && <FormatCodeTools />}

@@ -288,7 +288,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <CheckSquare className="w-3.5 h-3.5" />
                   </div>
                   <span className="font-bold text-xs text-slate-800 group-hover:text-emerald-700 transition">
-                    Task Studio
+                    Task Flow
                   </span>
                 </div>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
@@ -307,7 +307,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <Sparkles className="w-3.5 h-3.5" />
                   </div>
                   <span className="font-bold text-xs text-slate-800 group-hover:text-indigo-700 transition">
-                    AI Studio
+                    Lumen AI
                   </span>
                 </div>
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
@@ -326,7 +326,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <Wrench className="w-3.5 h-3.5" />
                   </div>
                   <span className="font-bold text-xs text-slate-800 group-hover:text-blue-700 transition">
-                    DevTools Studio
+                    Toolbox
                   </span>
                 </div>
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />

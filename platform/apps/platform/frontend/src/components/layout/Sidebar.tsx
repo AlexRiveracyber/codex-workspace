@@ -30,8 +30,8 @@ const mainNav: NavItem[] = [
   { to: '/templates', label: '模板市场', icon: Store },
 ];
 const subAppNav: NavItem[] = [
-  { to: '/subapps/task', label: 'Task Studio', icon: CheckSquare2, accent: 'bg-emerald-400', port: '3002' },
-  { to: '/subapps/ai', label: 'AI Studio', icon: Sparkles, accent: 'bg-violet-400', port: '3003' },
+  { to: '/subapps/task', label: 'Task Flow', icon: CheckSquare2, accent: 'bg-emerald-400', port: '3002' },
+  { to: '/subapps/ai', label: 'Lumen AI', icon: Sparkles, accent: 'bg-violet-400', port: '3003' },
   { to: '/subapps/tool', label: 'DevTools', icon: Wrench, accent: 'bg-sky-400', port: '3004' },
 ];
 const sysNav: NavItem[] = [

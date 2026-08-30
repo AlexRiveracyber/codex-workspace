@@ -4,10 +4,138 @@
 
 @layer base {
   body {
-    background-color: #f8fafc;
+    margin: 0;
+    background-color: #080b12;
     color: #1e293b;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
+}
+
+/* Lumen AI — a focused, nocturnal creation cockpit. */
+.ai-cockpit {
+  --ai-ink: #080b12;
+  --ai-panel: #101522;
+  --ai-line: rgba(255, 255, 255, 0.09);
+  --ai-violet: #9b87f5;
+  --ai-lime: #c8ff72;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 72% 10%, rgba(113, 86, 210, 0.18), transparent 32rem),
+    var(--ai-ink) !important;
+}
+
+.ai-cockpit::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.ai-topbar {
+  height: 72px !important;
+  padding-inline: 24px !important;
+  border-color: var(--ai-line) !important;
+  background: rgba(8, 11, 18, 0.9) !important;
+  box-shadow: 0 18px 48px rgba(0,0,0,.22) !important;
+}
+
+.ai-eyebrow {
+  margin-bottom: 2px;
+  color: #7e8aa5;
+  font: 600 8px/1.1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .19em;
+}
+
+.ai-title { color: #f6f5fb !important; font-size: 15px !important; letter-spacing: -.02em; }
+.ai-brand-mark {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 12px !important;
+  color: var(--ai-ink) !important;
+  border: 0 !important;
+  background: var(--ai-lime) !important;
+  box-shadow: 0 0 32px rgba(200,255,114,.16) !important;
+}
+
+.ai-wordmark span { border-color: #30384b !important; background: #161c29 !important; color: #aab3c7 !important; }
+.ai-mode-switcher { padding: 4px !important; border-color: var(--ai-line) !important; border-radius: 12px !important; background: #111622 !important; }
+.ai-mode-tab { min-width: 76px; justify-content: center; border-radius: 9px !important; color: #8994aa !important; }
+.ai-mode-tab.bg-blue-600 { background: #f2efff !important; color: #2b2345 !important; box-shadow: 0 5px 18px rgba(0,0,0,.22) !important; }
+.ai-mode-tab:hover { background: #1c2332 !important; color: #eef0f6 !important; }
+.ai-mode-tab.bg-blue-600:hover { background: #f2efff !important; color: #2b2345 !important; }
+
+.ai-status { border-color: var(--ai-line) !important; background: #101520 !important; }
+.ai-status .text-slate-500 { color: #78849a !important; }
+.ai-status .text-emerald-700 { color: var(--ai-lime) !important; }
+.ai-platform-link { border-color: var(--ai-line) !important; background: #171d2a !important; color: #c9cfdb !important; }
+.ai-platform-link:hover { background: #222a3a !important; color: #fff !important; }
+
+.ai-workspace { position: relative; padding: 18px 22px 22px !important; }
+.ai-chat-layout { height: calc(100vh - 112px) !important; gap: 16px !important; }
+.ai-thread-rail {
+  border-color: var(--ai-line) !important;
+  border-radius: 18px !important;
+  background: rgba(16,21,34,.92) !important;
+  box-shadow: 0 24px 70px rgba(0,0,0,.2) !important;
+}
+.ai-thread-rail > div > button { background: var(--ai-violet) !important; color: #0d0d14 !important; border-radius: 11px !important; }
+.ai-thread-rail .text-slate-600 { color: #909bb1 !important; }
+.ai-thread-rail .hover\:bg-slate-100:hover { background: #1a2130 !important; color: #f2f4f8 !important; }
+.ai-thread-rail .bg-blue-50 { background: rgba(155,135,245,.13) !important; border-color: rgba(155,135,245,.34) !important; color: #ded7ff !important; }
+.ai-thread-rail .text-blue-600 { color: #b8a9ff !important; }
+
+.ai-conversation {
+  border: 1px solid rgba(255,255,255,.08) !important;
+  border-radius: 20px !important;
+  background: #f4f2ed !important;
+  box-shadow: 0 28px 90px rgba(0,0,0,.35) !important;
+}
+.ai-model-bar { height: 64px !important; border-color: #dedbd3 !important; background: rgba(250,249,246,.94) !important; }
+.ai-model-bar > div > div:first-child { border: 0 !important; background: #161b27 !important; color: var(--ai-lime) !important; }
+.ai-model-bar select { border-color: #d2cec3 !important; border-radius: 10px !important; background: #fffdf8 !important; color: #3f356b !important; }
+.ai-message-stage {
+  padding: 26px clamp(18px, 4vw, 56px) !important;
+  background: #f4f2ed !important;
+}
+.ai-empty-state > div:first-child {
+  width: 64px !important;
+  height: 64px !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  color: #151823 !important;
+  background: var(--ai-lime) !important;
+  transform: rotate(-4deg);
+  box-shadow: 0 18px 36px rgba(87,101,60,.18);
+}
+.ai-empty-state h3 { font-size: 17px !important; color: #171922 !important; }
+.ai-empty-state p { color: #777468 !important; line-height: 1.7 !important; }
+.ai-message-stage .bg-blue-600 { background: #1d2030 !important; color: #f8f7f2 !important; }
+.ai-message-stage .bg-white { border-color: #dedbd3 !important; background: #fffdf9 !important; color: #242631 !important; }
+
+.ai-catalog { padding: 8px 2px 24px; }
+.ai-catalog > div:first-child h2 { color: #f5f3fb !important; font-size: 18px !important; }
+.ai-catalog > div:first-child p { color: #7f8ba1 !important; }
+.ai-catalog > div:first-child > button { background: var(--ai-lime) !important; color: #11151d !important; }
+.ai-catalog .bg-white { border-color: rgba(255,255,255,.08) !important; border-radius: 16px !important; background: #f8f6f1 !important; box-shadow: 0 16px 42px rgba(0,0,0,.16) !important; }
+.ai-catalog table .bg-slate-50, .ai-catalog thead { background: #ece9e2 !important; }
+
+.ai-cockpit .glass-panel,
+.ai-cockpit .glass-card { border-color: var(--ai-line); border-radius: 18px; background: rgba(16,21,34,.92); color: #e9ebf2; box-shadow: 0 24px 70px rgba(0,0,0,.22); }
+.ai-cockpit .glass-input { border-color: #303849; background: #151b28; color: #eef0f5; }
+
+@media (max-width: 760px) {
+  .ai-topbar { height: auto !important; min-height: 70px; padding: 10px 12px !important; gap: 8px; flex-wrap: wrap; }
+  .ai-mode-switcher { order: 3; width: 100%; overflow-x: auto; }
+  .ai-mode-tab { flex: 1; min-width: 68px; }
+  .ai-status { display: none !important; }
+  .ai-workspace { padding: 10px !important; }
+  .ai-chat-layout { height: calc(100vh - 132px) !important; }
+  .ai-thread-rail:not(.w-14) { width: 210px !important; position: absolute; z-index: 30; height: calc(100% - 20px); }
 }
 
 /* Custom smooth light scrollbars */

@@ -37,7 +37,7 @@ import { VideoPlayerModal } from './components/VideoPlayerModal';
 export const App: React.FC = () => {
   const [activeNavTab, setActiveNavTab] = useState<'chat' | 'models' | 'providers' | 'logs'>('chat');
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
-    return localStorage.getItem('ai_sidebar_collapsed') === 'true';
+    return window.innerWidth < 760 || localStorage.getItem('ai_sidebar_collapsed') === 'true';
   });
 
   // Conversations & Chat
@@ -301,9 +301,9 @@ export const App: React.FC = () => {
   const currentConv = conversations.find((c) => c.id === currentConvId);
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-slate-800 font-sans flex flex-col selection:bg-blue-500 selection:text-white">
+    <div className="ai-cockpit min-h-screen bg-[#f8fafc] text-slate-800 font-sans flex flex-col selection:bg-blue-500 selection:text-white">
       {/* Top Navbar */}
-      <header className="h-14 border-b border-slate-200 bg-white/95 backdrop-blur-md px-4 flex items-center justify-between sticky top-0 z-40 shrink-0 shadow-xs">
+      <header className="ai-topbar h-14 border-b border-slate-200 bg-white/95 backdrop-blur-md px-4 flex items-center justify-between sticky top-0 z-40 shrink-0 shadow-xs">
         <div className="flex items-center gap-3">
           {activeNavTab === 'chat' && (
             <button
@@ -319,15 +319,16 @@ export const App: React.FC = () => {
             </button>
           )}
 
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 font-bold shadow-xs">
+          <div className="ai-wordmark flex items-center gap-2.5">
+            <div className="ai-brand-mark w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 font-bold shadow-xs">
               <Sparkles className="w-4 h-4" />
             </div>
             <div>
+              <div className="ai-eyebrow">PLATFORM / INTELLIGENCE</div>
               <div className="flex items-center gap-2">
-                <h1 className="text-sm font-bold text-slate-900 tracking-tight">AI Studio</h1>
+                <h1 className="ai-title text-sm font-bold text-slate-900 tracking-tight">Lumen AI</h1>
                 <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200 font-mono font-semibold">
-                  v2.0
+                  LAB
                 </span>
               </div>
             </div>
@@ -335,10 +336,10 @@ export const App: React.FC = () => {
         </div>
 
         {/* Center Tabs */}
-        <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs">
+        <div className="ai-mode-switcher flex items-center gap-1 p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs">
           <button
             onClick={() => setActiveNavTab('chat')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer ${
+            className={`ai-mode-tab flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer ${
               activeNavTab === 'chat' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
             }`}
           >
@@ -347,7 +348,7 @@ export const App: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveNavTab('models')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer ${
+            className={`ai-mode-tab flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer ${
               activeNavTab === 'models' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
             }`}
           >
@@ -356,7 +357,7 @@ export const App: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveNavTab('providers')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer ${
+            className={`ai-mode-tab flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer ${
               activeNavTab === 'providers' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
             }`}
           >
@@ -365,7 +366,7 @@ export const App: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveNavTab('logs')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer ${
+            className={`ai-mode-tab flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer ${
               activeNavTab === 'logs' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
             }`}
           >
@@ -376,7 +377,7 @@ export const App: React.FC = () => {
 
         {/* Right Actions */}
         <div className="flex items-center gap-2.5">
-          <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-white border border-slate-200 shadow-xs text-xs">
+          <div className="ai-status hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-white border border-slate-200 shadow-xs text-xs">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-slate-500 text-[11px]">网关:</span>
             <span className="font-mono text-emerald-700 font-semibold text-[11px]">huifu ({models.length || 29}款模型就绪)</span>
@@ -386,7 +387,7 @@ export const App: React.FC = () => {
             href="http://localhost:3100"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition cursor-pointer"
+            className="ai-platform-link flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition cursor-pointer"
           >
             <LayoutGrid className="w-3.5 h-3.5" />
             <span className="hidden md:inline">Platform (3100)</span>
@@ -395,13 +396,13 @@ export const App: React.FC = () => {
       </header>
 
       {/* Main Content Workspace */}
-      <div className="flex-1 flex w-full p-3 md:p-4 gap-3 md:gap-4 overflow-hidden">
+      <div className="ai-workspace flex-1 flex w-full p-3 md:p-4 gap-3 md:gap-4 overflow-hidden">
         {/* ================= TAB 1: Chat Workspace ================= */}
         {activeNavTab === 'chat' && (
-          <div className="flex-1 flex gap-3 md:gap-4 w-full h-[calc(100vh-5rem)]">
+          <div className="ai-chat-layout flex-1 flex gap-3 md:gap-4 w-full h-[calc(100vh-5rem)]">
             {/* Collapsible Left Conversations Sidebar */}
             <aside
-              className={`border border-slate-200 bg-white rounded-xl p-3 flex flex-col justify-between transition-all duration-200 shrink-0 select-none overflow-hidden shadow-xs ${
+              className={`ai-thread-rail border border-slate-200 bg-white rounded-xl p-3 flex flex-col justify-between transition-all duration-200 shrink-0 select-none overflow-hidden shadow-xs ${
                 sidebarCollapsed ? 'w-14 items-center px-1.5' : 'w-64'
               }`}
             >
@@ -459,9 +460,9 @@ export const App: React.FC = () => {
             </aside>
 
             {/* Chat Messages + Top-Left Model Selector Workspace */}
-            <main className="flex-1 bg-white rounded-xl flex flex-col border border-slate-200 shadow-xs overflow-hidden">
+            <main className="ai-conversation flex-1 bg-white rounded-xl flex flex-col border border-slate-200 shadow-xs overflow-hidden">
               {/* Header: Prominent Model Selector on Top-Left */}
-              <div className="h-14 border-b border-slate-200 px-4 flex items-center justify-between bg-slate-50/80 shrink-0 gap-3">
+              <div className="ai-model-bar h-14 border-b border-slate-200 px-4 flex items-center justify-between bg-slate-50/80 shrink-0 gap-3">
                 {/* Top-Left Model Selector */}
                 <div className="flex items-center gap-2.5 min-w-0 flex-1">
                   <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center shrink-0">
@@ -606,9 +607,9 @@ export const App: React.FC = () => {
               </div>
 
               {/* Messages Area */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/40">
+              <div className="ai-message-stage flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/40">
                 {messages.length === 0 && (
-                  <div className="h-full flex flex-col items-center justify-center text-center p-8 space-y-3">
+                  <div className="ai-empty-state h-full flex flex-col items-center justify-center text-center p-8 space-y-3">
                     <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center">
                       <Sparkles className="w-6 h-6" />
                     </div>
@@ -751,7 +752,7 @@ export const App: React.FC = () => {
 
         {/* ================= TAB 2: Model Matrix ================= */}
         {activeNavTab === 'models' && (
-          <div className="flex-1 space-y-4 overflow-y-auto">
+          <div className="ai-catalog flex-1 space-y-4 overflow-y-auto">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-base font-bold text-slate-900">大模型管理矩阵 (Model Matrix)</h2>
@@ -805,7 +806,7 @@ export const App: React.FC = () => {
 
         {/* ================= TAB 3: Providers ================= */}
         {activeNavTab === 'providers' && (
-          <div className="flex-1 space-y-4 overflow-y-auto">
+          <div className="ai-catalog flex-1 space-y-4 overflow-y-auto">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-base font-bold text-slate-900">服务商配置 (Providers)</h2>
@@ -852,7 +853,7 @@ export const App: React.FC = () => {
 
         {/* ================= TAB 4: Logs ================= */}
         {activeNavTab === 'logs' && (
-          <div className="flex-1 space-y-4 overflow-y-auto">
+          <div className="ai-catalog flex-1 space-y-4 overflow-y-auto">
             <div className="flex items-center justify-between">
               <h2 className="text-base font-bold text-slate-900">AI 调用审计日志</h2>
               <button onClick={loadLogs} className="text-xs text-blue-600 hover:text-blue-700 font-semibold cursor-pointer">

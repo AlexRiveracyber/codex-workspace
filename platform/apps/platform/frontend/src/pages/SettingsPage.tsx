@@ -71,12 +71,12 @@ export const SettingsPage: React.FC = () => {
             <div className="text-emerald-700 font-semibold text-[10px]">● 已就绪</div>
           </div>
           <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 space-y-1">
-            <div className="font-bold text-slate-900">AI Studio (AI)</div>
+            <div className="font-bold text-slate-900">Lumen AI</div>
             <div className="text-slate-500 text-[11px]">后端: 8083 · 前端: 3003</div>
             <div className="text-indigo-700 font-semibold text-[10px]">● 已就绪</div>
           </div>
           <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 space-y-1">
-            <div className="font-bold text-slate-900">DevTools Studio (工具)</div>
+            <div className="font-bold text-slate-900">Toolbox (工具)</div>
             <div className="text-slate-500 text-[11px]">后端: 8084 · 前端: 3004</div>
             <div className="text-blue-700 font-semibold text-[10px]">● 已就绪</div>
           </div>
