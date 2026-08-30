@@ -116,6 +116,62 @@
 .task-console .status-badge-post { border-color: #efb6a8; background: #fff0eb; color: #a64535; }
 .task-console .glass-modal { border-radius: 18px; }
 
+/* Calm light workspace — keeps long payment sessions readable without dark blocks. */
+.task-console {
+  --task-ink: #5f5055;
+  --task-wine: #796169;
+  --task-coral: #c9a098;
+  --task-paper: #f4f1ed;
+  --task-line: #ddd5ce;
+}
+.task-topbar { border-bottom: 1px solid #d9cfcd !important; background: #eee7e5 !important; box-shadow: 0 10px 28px rgba(91,72,77,.09) !important; }
+.task-topbar > div:first-child > div > button { border-color: #d3c7c5 !important; background: #f8f3f1 !important; color: #705f64 !important; }
+.task-brand-mark { background: #d8c0bb !important; color: #65545a !important; }
+.task-eyebrow { color: #8f7d82; }
+.task-title { color: #514348 !important; }
+.task-wordmark span { border-color: #d4c8c6 !important; background: #f8f3f1 !important; color: #806e73 !important; }
+.task-merchant-select { border-color: #d4c8c6 !important; background: #f8f3f1 !important; color: #5f5055 !important; }
+.task-merchant-select .text-slate-500 { color: #8c7a7f !important; }
+.task-merchant-select select { color: #5f5055 !important; }
+.task-merchant-tools > button { border-color: #d2bbb6 !important; background: #e5d4d0 !important; color: #735b61 !important; }
+.task-platform-link { border-color: #d4c8c6 !important; background: #f8f3f1 !important; color: #66575c !important; }
+.task-platform-link:hover { background: #e4d9d6 !important; color: #504348 !important; }
+.task-nav-stack { border: 1px solid #d8cfcc; box-shadow: 0 18px 42px rgba(81,66,70,.1); }
+.task-category-rail { background: #e4dcda; color: #6e6064; }
+.task-rail-caption { color: #9a898e; }
+.task-category-list button { color: #7f7074; }
+.task-category-list button:hover { background: #dcd1ce; color: #594b50; }
+.task-category-list button.is-active { border-color: #c6ada8; background: #d6c3bf; color: #59494e; }
+.task-rail-toggle { border-color: #cec0bd; background: #f2ece9; color: #75656a; }
+.task-rail-toggle:hover { border-color: #aa8d88; color: #5a494f; }
+.task-endpoint-panel { background: #eee8e5; color: #65565b; }
+.task-endpoint-heading { border-color: #d5c9c6; }
+.task-endpoint-heading span { color: #99868c; }
+.task-endpoint-heading h2 { color: #55464b; }
+.task-endpoint-heading strong { color: #8b6b70; }
+.task-endpoint-search { border-color: #d5c9c6; background: #f8f4f1; color: #8c7b80; }
+.task-endpoint-search input { color: #5b4c51 !important; }
+.task-endpoint-search input::placeholder { color: #a09094 !important; }
+.task-endpoint-list button { color: #76666b; }
+.task-endpoint-list button:hover { background: #e2d8d5; color: #55464b; }
+.task-endpoint-list button.is-active { border: 1px solid #d1bfbb; background: #faf6f3; color: #58484e; }
+.task-endpoint-number { color: #9b898e; }
+.task-endpoint-method { color: #8e6b70; }
+.task-endpoint-empty { color: #9a898d; }
+.task-console .bg-blue-600 { background-color: #796b70 !important; }
+.task-console .hover\:bg-blue-700:hover { background-color: #685b60 !important; }
+.task-console .bg-\[\#fa8c16\] { background-color: #d4b5ae !important; color: #5b484e !important; }
+.task-console pre.bg-slate-900 { border-color: #d8d1ca !important; background: #f3f0eb !important; color: #514b55 !important; }
+
+.task-main { padding-bottom: 96px !important; }
+.task-action-dock.is-directory-collapsed { left: 128px; }
+.task-action-dock.is-directory-open { left: 380px; }
+.task-last-result { display: inline-flex; align-items: center; border: 1px solid; border-radius: 999px; padding: 3px 8px; font: 700 9px ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; }
+.task-last-result.is-success { border-color: #bad0c5; background: #e8f0eb; color: #547063; }
+.task-last-result.is-failure { border-color: #dbc2b6; background: #f4e9e3; color: #855f52; }
+.task-action-dock button.bg-gradient-to-r { background-color: #756a70 !important; background-image: none !important; box-shadow: 0 6px 16px rgba(91,77,84,.16) !important; }
+.task-action-dock button.bg-gradient-to-r:hover { background-color: #665c61 !important; }
+
 @media (max-width: 900px) {
   .task-topbar { height: auto !important; min-height: 72px; padding: 10px 12px !important; gap: 10px; }
   .task-merchant-select span { display: none; }
@@ -125,6 +181,16 @@
   .task-category-rail { width: 68px; }
   .task-nav-stack { border-radius: 4px 14px 14px 4px; }
   .task-endpoint-panel { position: absolute; z-index: 30; left: 80px; width: 238px; height: calc(100% - 24px); box-shadow: 20px 20px 50px rgba(38,28,32,.25); }
+  .task-action-dock.is-directory-collapsed { left: 92px; }
+  .task-action-dock.is-directory-open { left: 330px; }
+}
+
+@media (max-width: 640px) {
+  .task-action-dock.is-directory-collapsed,
+  .task-action-dock.is-directory-open { right: 8px; bottom: 8px; left: 8px; }
+  .task-action-dock > div { padding: 8px 10px !important; justify-content: flex-end; }
+  .task-action-dock > div > div:first-child { display: none; }
+  .task-action-dock .px-6 { padding-inline: 12px !important; }
 }
 
 /* Custom smooth scrollbars */

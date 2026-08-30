@@ -91,6 +91,22 @@ interface CategoryGroup {
   items: ApiMenuItem[];
 }
 
+interface ExecutionRecord {
+  id: number;
+  apiName: string;
+  apiPath: string;
+  method: string;
+  reqSeqId: string;
+  huifuId: string;
+  requestPayload: any;
+  responseData: any;
+  isSuccess: boolean;
+  respCode: string;
+  respDesc: string;
+  durationMs: number;
+  timestamp: string;
+}
+
 export const App: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
     return window.innerWidth < 900 || localStorage.getItem('task_sidebar_collapsed') === 'true';
@@ -165,37 +181,9 @@ export const App: React.FC = () => {
   // Execution & History Modals State
   const [isResultModalOpen, setIsResultModalOpen] = useState(false);
   const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
-  const [lastExecution, setLastExecution] = useState<{
-    id: number;
-    apiName: string;
-    apiPath: string;
-    method: string;
-    reqSeqId: string;
-    huifuId: string;
-    requestPayload: any;
-    responseData: any;
-    isSuccess: boolean;
-    respCode: string;
-    respDesc: string;
-    durationMs: number;
-    timestamp: string;
-  } | null>(null);
+  const [lastExecution, setLastExecution] = useState<ExecutionRecord | null>(null);
 
-  const [historyList, setHistoryList] = useState<Array<{
-    id: number;
-    apiName: string;
-    apiPath: string;
-    method: string;
-    reqSeqId: string;
-    huifuId: string;
-    requestPayload: any;
-    responseData: any;
-    isSuccess: boolean;
-    respCode: string;
-    respDesc: string;
-    durationMs: number;
-    timestamp: string;
-  }>>(() => {
+  const [historyList, setHistoryList] = useState<ExecutionRecord[]>(() => {
     try {
       const saved = localStorage.getItem('task_exec_history');
       return saved ? JSON.parse(saved) : [];
@@ -1765,18 +1753,62 @@ export const App: React.FC = () => {
   }, []);
 
   const handleApiCall = async (endpoint: string) => {
+    const startedAt = performance.now();
     setLoading(true);
     setApiResponse(null);
-    try {
-      const requestPayload = {
-        ...serializePayload,
-        config_id: activeConfig?.id,
+    setIsResultModalOpen(false);
+    const requestPayload: Record<string, any> = {
+      ...serializePayload,
+      config_id: activeConfig?.id,
+    };
+
+    const saveExecution = (responseData: any, forceFailure = false) => {
+      const respCode = String(
+        responseData?.resp_code ?? responseData?.respCode ?? (forceFailure ? 'REQUEST_ERROR' : 'NO_RESPONSE')
+      );
+      const respDesc = String(
+        responseData?.resp_desc ?? responseData?.respDesc ?? responseData?.message ?? responseData?.error ?? ''
+      );
+      const successCodes = ['00000000', '000000', '00', 'SUCCESS'];
+      const record: ExecutionRecord = {
+        id: Date.now(),
+        apiName: currentMenu.label,
+        apiPath: currentMenu.api,
+        method: currentMenu.method,
+        reqSeqId: String(requestPayload.req_seq_id ?? responseData?.req_seq_id ?? ''),
+        huifuId: String(requestPayload.huifu_id ?? activeConfig?.sysId ?? ''),
+        requestPayload,
+        responseData,
+        isSuccess: !forceFailure && successCodes.includes(respCode.toUpperCase()),
+        respCode,
+        respDesc,
+        durationMs: Math.max(0, Math.round(performance.now() - startedAt)),
+        timestamp: new Date().toLocaleString('zh-CN', { hour12: false }),
       };
+
+      setLastExecution(record);
+      setHistoryList((previous) => {
+        const next = [record, ...previous].slice(0, 100);
+        try {
+          localStorage.setItem('task_exec_history', JSON.stringify(next));
+        } catch {
+          // Keep the in-memory result visible if browser storage is unavailable or full.
+        }
+        return next;
+      });
+      setResultTab('both');
+      setIsResultModalOpen(true);
+    };
+
+    try {
       const res = await axios.post(endpoint, requestPayload);
       setApiResponse(res.data);
+      saveExecution(res.data);
       fetchLogs();
     } catch (e: any) {
-      setApiResponse(e.response?.data || { error: e.message });
+      const errorResponse = e.response?.data || { error: e.message || '请求失败' };
+      setApiResponse(errorResponse);
+      saveExecution(errorResponse, true);
     } finally {
       setLoading(false);
     }
@@ -2464,8 +2496,8 @@ export const App: React.FC = () => {
 
           {/* ================= Fixed Floating Action Dock (固定在视口底部右侧内容区，不随滚动跑掉，不遮挡侧边栏) ================= */}
           <div
-            className={`fixed bottom-3 right-4 z-40 transition-all duration-200 ${
-              sidebarCollapsed ? 'left-20' : 'left-[17rem]'
+            className={`task-action-dock fixed bottom-3 right-4 z-40 transition-all duration-200 ${
+              sidebarCollapsed ? 'is-directory-collapsed' : 'is-directory-open'
             }`}
           >
             <div className="bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-2xl rounded-2xl px-5 py-2.5 flex items-center justify-between gap-3">
@@ -2479,6 +2511,16 @@ export const App: React.FC = () => {
                   <span className="hidden md:inline-block font-mono text-[11px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                     {currentMenu.api}
                   </span>
+                  {lastExecution && (
+                    <button
+                      type="button"
+                      onClick={() => setIsResultModalOpen(true)}
+                      className={`task-last-result ${lastExecution.isSuccess ? 'is-success' : 'is-failure'}`}
+                      title="查看上一次提交结果"
+                    >
+                      {lastExecution.respCode} · {lastExecution.durationMs}ms
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -2551,7 +2593,7 @@ export const App: React.FC = () => {
                           : 'bg-amber-50 text-amber-700 border-amber-300'
                       }`}
                     >
-                      {lastExecution.isSuccess ? '调用成功 (00000000)' : `业务反馈 (${lastExecution.respCode})`}
+                      {lastExecution.isSuccess ? `调用成功 (${lastExecution.respCode})` : `业务反馈 (${lastExecution.respCode})`}
                     </span>
                   </div>
                   <div className="text-xs text-slate-500 font-mono mt-1 flex items-center gap-3 flex-wrap">

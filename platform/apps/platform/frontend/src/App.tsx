@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import { AlertTriangle, CheckCircle2, X } from 'lucide-react';
 import { Navbar } from './components/layout/Navbar';
 import { Sidebar } from './components/layout/Sidebar';
@@ -213,8 +213,9 @@ export const App: React.FC = () => {
           <main className="workspace-bg min-w-0 flex-1 overflow-y-auto p-4 md:p-7">
             <div className="mx-auto w-full max-w-[1500px]">
               <Routes>
+                <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route
-                  path="/"
+                  path="/dashboard"
                   element={
                     <DashboardPage
                       revision={dataRevision}

@@ -106,27 +106,27 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
-      <section className="relative overflow-hidden rounded-[22px] bg-slate-950 p-5 text-white shadow-xl shadow-slate-950/10 md:p-6">
-        <div className="pointer-events-none absolute -right-16 -top-28 h-72 w-72 rounded-full bg-indigo-500/20 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 left-1/3 h-24 w-64 bg-sky-400/10 blur-3xl" />
+      <section className="relative overflow-hidden rounded-[22px] border border-slate-200 bg-slate-200/70 p-5 text-slate-800 shadow-lg shadow-slate-500/5 md:p-6">
+        <div className="pointer-events-none absolute -right-16 -top-28 h-72 w-72 rounded-full bg-indigo-200/35 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-0 left-1/3 h-24 w-64 bg-emerald-100/40 blur-3xl" />
         <div className="relative flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div>
             <div className="mb-3 flex items-center gap-2">
-              <span className="rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[0.18em] text-indigo-200">System overview</span>
-              <span className="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400">
+              <span className="rounded-full border border-slate-300 bg-white/60 px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[0.18em] text-slate-600">System overview</span>
+              <span className="flex items-center gap-1.5 text-[10px] font-semibold text-slate-500">
                 <span className={`h-1.5 w-1.5 rounded-full ${summary?.dockerConnected ? 'bg-emerald-400' : 'bg-amber-400'}`} />
                 {summary?.dockerConnected ? '基础设施在线' : '等待本地引擎'}
               </span>
             </div>
             <h1 className="text-2xl font-black tracking-[-0.035em] md:text-[28px]">你的本地服务，一屏掌控</h1>
-            <p className="mt-2 max-w-2xl text-xs leading-relaxed text-slate-400">统一管理应用、容器和工作室服务。关键状态与最近操作集中呈现，常用动作无需跳转即可完成。</p>
+            <p className="mt-2 max-w-2xl text-xs leading-relaxed text-slate-600">统一管理应用、容器和工作室服务。关键状态与最近操作集中呈现，常用动作无需跳转即可完成。</p>
           </div>
           <div className="flex items-center gap-2">
-            <div className="hidden rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-right sm:block">
+            <div className="hidden rounded-xl border border-slate-300 bg-white/50 px-3 py-2 text-right sm:block">
               <p className="text-[9px] font-bold uppercase tracking-wider text-slate-500">Last sync</p>
-              <p className="mt-1 font-mono text-[10px] text-slate-300">{lastRefreshedAt ? lastRefreshedAt.toLocaleTimeString('zh-CN', { hour12: false }) : '尚未同步'}</p>
+              <p className="mt-1 font-mono text-[10px] text-slate-600">{lastRefreshedAt ? lastRefreshedAt.toLocaleTimeString('zh-CN', { hour12: false }) : '尚未同步'}</p>
             </div>
-            <button onClick={refreshData} disabled={loading} className="inline-flex h-10 items-center gap-2 rounded-xl bg-white px-4 text-xs font-extrabold text-slate-950 transition hover:-translate-y-0.5 hover:bg-indigo-50 disabled:opacity-60">
+            <button onClick={refreshData} disabled={loading} className="inline-flex h-10 items-center gap-2 rounded-xl bg-slate-600 px-4 text-xs font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-slate-700 disabled:opacity-60">
               <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
               <span>{loading ? '同步中' : '同步状态'}</span>
             </button>

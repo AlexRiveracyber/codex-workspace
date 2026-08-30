@@ -34,9 +34,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       </button>
 
       <div className="flex min-w-0 items-center gap-3">
-        <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-950 text-white shadow-lg shadow-indigo-950/20">
+        <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-200 text-slate-600 shadow-sm">
           <Box className="h-[18px] w-[18px]" strokeWidth={1.8} />
-          <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-indigo-500" />
+          <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-slate-400" />
         </div>
         <div className="min-w-0">
           <div className="flex items-center gap-2">

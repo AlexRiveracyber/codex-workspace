@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: light; --workspace:#f4f6fa; --ink:#0f172a; --muted:#64748b; --brand:#4f46e5; }
+:root { color-scheme: light; --workspace:#f3f5f6; --ink:#334155; --muted:#687386; --brand:#748095; }
 * { box-sizing:border-box; }
 html { background:var(--workspace); }
 body {
@@ -11,10 +11,10 @@ body {
   -webkit-font-smoothing:antialiased;
 }
 button,input,select,textarea { font:inherit; }
-button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible { outline:2px solid #6366f1; outline-offset:2px; }
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible { outline:2px solid #7c8799; outline-offset:2px; }
 .workspace-bg {
   background-color:var(--workspace);
-  background-image:radial-gradient(circle at 8% 0%,rgba(99,102,241,.07),transparent 26rem),radial-gradient(circle at 92% 14%,rgba(14,165,233,.055),transparent 24rem);
+  background-image:radial-gradient(circle at 8% 0%,rgba(126,139,158,.09),transparent 26rem),radial-gradient(circle at 92% 14%,rgba(143,158,157,.07),transparent 24rem);
 }
 ::-webkit-scrollbar { width:7px; height:7px; }
 ::-webkit-scrollbar-track { background:transparent; }
@@ -23,12 +23,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 
 @layer components {
   .icon-button { @apply inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900; }
-  .primary-button { @apply inline-flex h-9 items-center justify-center gap-2 rounded-xl bg-slate-950 px-3.5 text-xs font-bold text-white shadow-lg shadow-slate-950/10 transition hover:-translate-y-0.5 hover:bg-indigo-600 hover:shadow-indigo-600/20 disabled:pointer-events-none disabled:opacity-50; }
+  .primary-button { @apply inline-flex h-9 items-center justify-center gap-2 rounded-xl bg-slate-600 px-3.5 text-xs font-bold text-white shadow-lg shadow-slate-600/10 transition hover:-translate-y-0.5 hover:bg-slate-700 disabled:pointer-events-none disabled:opacity-50; }
   .secondary-button { @apply inline-flex h-9 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 text-xs font-bold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:text-slate-950 disabled:pointer-events-none disabled:opacity-50; }
   .metric-card { @apply relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 p-4 shadow-[0_1px_2px_rgba(15,23,42,0.03),0_10px_30px_rgba(15,23,42,0.035)] transition hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-950/5; }
-  .sidebar-label { @apply mb-2 px-3 text-[9px] font-extrabold uppercase tracking-[0.18em] text-slate-600; }
-  .sidebar-link { @apply flex min-h-10 items-center justify-between rounded-xl px-3 text-[12px] font-semibold text-slate-400 transition duration-200 hover:bg-white/[0.055] hover:text-white; }
-  .sidebar-link-active { @apply bg-white/[0.09] text-white shadow-[inset_3px_0_0_#818cf8]; }
+  .sidebar-label { @apply mb-2 px-3 text-[9px] font-extrabold uppercase tracking-[0.18em] text-slate-500; }
+  .sidebar-link { @apply flex min-h-10 items-center justify-between rounded-xl px-3 text-[12px] font-semibold text-slate-600 transition duration-200 hover:bg-white/70 hover:text-slate-800; }
+  .sidebar-link-active { @apply bg-white text-slate-800 shadow-[inset_3px_0_0_#94a3b8]; }
 }
 .doc-card,.glass-panel,.glass-card { background:rgba(255,255,255,.9); border:1px solid rgba(226,232,240,.9); box-shadow:0 1px 2px rgba(15,23,42,.03),0 10px 30px rgba(15,23,42,.035); }
 .doc-card-hover,.glass-panel-hover { transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease; }

@@ -1,18 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <!-- Vibrant Hot Pink / Purple Background -->
-  <rect width="128" height="128" rx="28" fill="#701a75"/>
-  <rect x="4" y="4" width="120" height="120" rx="24" fill="#c026d3" stroke="#f472b6" stroke-width="4"/>
-
-  <!-- Giant Bold 4-Point AI Sparkle Star (Pure White & Bright Yellow Core) -->
-  <path d="M64 12 C64 44 76 56 116 64 C76 72 64 84 64 116 C64 84 52 72 12 64 C52 56 64 44 64 12 Z" fill="#ffffff"/>
-
-  <!-- Center Diamond Sparkle Core -->
-  <polygon points="64,36 78,64 64,92 50,64" fill="#fef08a"/>
-  <circle cx="64" cy="64" r="8" fill="#ec4899"/>
-  <circle cx="64" cy="64" r="4" fill="#ffffff"/>
-
-  <!-- Accent Floating Star Top-Right -->
-  <circle cx="98" cy="28" r="7" fill="#ffffff"/>
-  <!-- Accent Floating Star Bottom-Left -->
-  <circle cx="30" cy="100" r="5" fill="#fde047"/>
+  <rect width="128" height="128" rx="30" fill="#e1e4ee"/>
+  <circle cx="64" cy="64" r="43" fill="#f7f8fb" stroke="#7b829d" stroke-width="6"/>
+  <path d="M64 28c3 21 13 31 36 36-23 5-33 15-36 36-3-21-13-31-36-36 23-5 33-15 36-36Z" fill="#8b91a9"/>
+  <path d="M64 46c2 10 7 16 18 18-11 2-16 8-18 18-2-10-7-16-18-18 11-2 16-8 18-18Z" fill="#d9ddca"/>
+  <circle cx="96" cy="34" r="7" fill="#a9aec0"/>
 </svg>

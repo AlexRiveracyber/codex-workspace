@@ -128,6 +128,51 @@
 .ai-cockpit .glass-card { border-color: var(--ai-line); border-radius: 18px; background: rgba(16,21,34,.92); color: #e9ebf2; box-shadow: 0 24px 70px rgba(0,0,0,.22); }
 .ai-cockpit .glass-input { border-color: #303849; background: #151b28; color: #eef0f5; }
 
+/* Calm daylight palette — muted periwinkle rather than black cockpit panels. */
+body { background-color: #eef0f4; }
+.ai-cockpit {
+  --ai-ink: #edf0f5;
+  --ai-panel: #f7f8fa;
+  --ai-line: rgba(91, 98, 122, 0.16);
+  --ai-violet: #a9aec2;
+  --ai-lime: #d9deca;
+  background: radial-gradient(circle at 72% 10%, rgba(150,157,184,.18), transparent 32rem), #edf0f5 !important;
+  color: #4e5364;
+}
+.ai-cockpit::before { opacity: .18; background-image: linear-gradient(rgba(83,91,116,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(83,91,116,.08) 1px, transparent 1px); }
+.ai-topbar { border-color: #d7dae3 !important; background: rgba(235,237,243,.96) !important; box-shadow: 0 14px 34px rgba(76,82,103,.1) !important; }
+.ai-eyebrow { color: #8a90a4; }
+.ai-title { color: #51576a !important; }
+.ai-brand-mark { color: #596079 !important; background: #d9ddca !important; box-shadow: none !important; }
+.ai-wordmark span { border-color: #d3d6e0 !important; background: #f7f8fa !important; color: #737a8f !important; }
+.ai-mode-switcher { border-color: #d5d8e1 !important; background: #f6f7f9 !important; }
+.ai-mode-tab { color: #777e92 !important; }
+.ai-mode-tab:hover { background: #e8eaf0 !important; color: #555b6e !important; }
+.ai-mode-tab.bg-blue-600,
+.ai-mode-tab.bg-blue-600:hover { border: 1px solid #cbd0dc !important; background: #dfe2eb !important; color: #565d76 !important; box-shadow: none !important; }
+.ai-status { border-color: #d4d7e0 !important; background: #f7f8fa !important; }
+.ai-status .text-slate-500 { color: #7d8497 !important; }
+.ai-status .text-emerald-700 { color: #687864 !important; }
+.ai-platform-link { border-color: #d4d7e0 !important; background: #f7f8fa !important; color: #656c80 !important; }
+.ai-platform-link:hover { background: #e1e4eb !important; color: #505668 !important; }
+.ai-thread-rail { border-color: #d7dae2 !important; background: rgba(247,248,250,.96) !important; box-shadow: 0 20px 48px rgba(70,76,97,.1) !important; }
+.ai-thread-rail > div > button { background: #d8dce7 !important; color: #565d73 !important; }
+.ai-thread-rail .text-slate-600 { color: #747b8d !important; }
+.ai-thread-rail .hover\:bg-slate-100:hover { background: #e9ebf0 !important; color: #555c6f !important; }
+.ai-thread-rail .bg-blue-50 { border-color: #cbd0dd !important; background: #e1e4ed !important; color: #596079 !important; }
+.ai-thread-rail .text-blue-600 { color: #68708a !important; }
+.ai-conversation { border-color: #d8d9dd !important; box-shadow: 0 24px 60px rgba(70,76,97,.12) !important; }
+.ai-model-bar > div > div:first-child { background: #dde1e9 !important; color: #5e657d !important; }
+.ai-empty-state > div:first-child { color: #596079 !important; background: #dce1cf !important; box-shadow: 0 16px 30px rgba(91,100,76,.12); }
+.ai-message-stage .bg-blue-600 { background: #dfe3ec !important; color: #50576c !important; }
+.ai-catalog > div:first-child h2 { color: #505669 !important; }
+.ai-catalog > div:first-child p { color: #7a8194 !important; }
+.ai-catalog > div:first-child > button { background: #d9deca !important; color: #586052 !important; }
+.ai-catalog .bg-white { border-color: #d6d9e1 !important; box-shadow: 0 14px 34px rgba(70,76,97,.08) !important; }
+.ai-cockpit .glass-panel,
+.ai-cockpit .glass-card { border-color: #d7dae2; background: rgba(248,249,251,.96); color: #51576a; box-shadow: 0 20px 48px rgba(70,76,97,.1); }
+.ai-cockpit .glass-input { border-color: #d1d5df; background: #fff; color: #51576a; }
+
 @media (min-width: 761px) {
   .ai-topbar {
     position: fixed !important;
@@ -151,7 +196,7 @@
     align-items: center;
     justify-content: center;
     border-color: var(--ai-line) !important;
-    background: #151b27 !important;
+    background: #f7f8fa !important;
   }
   .ai-wordmark { justify-content: center; }
   .ai-wordmark > div:last-child { display: none; }

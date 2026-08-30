@@ -1,18 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <!-- Solid High-Contrast Background -->
-  <rect width="128" height="128" rx="28" fill="#4f46e5"/>
-
-  <!-- Outer Hexagon Prism -->
-  <path d="M64 14 L110 40 L110 88 L64 114 L18 88 L18 40 Z" fill="#312e81"/>
-
-  <!-- Isometric 3D Platform Top Face -->
-  <polygon points="64,22 102,44 64,66 26,44" fill="#818cf8"/>
-  <!-- Left Face -->
-  <polygon points="26,44 64,66 64,106 26,84" fill="#4338ca"/>
-  <!-- Right Face -->
-  <polygon points="64,66 102,44 102,84 64,106" fill="#6366f1"/>
-
-  <!-- Center Glowing Platform Power Core -->
-  <polygon points="64,40 80,50 64,60 48,50" fill="#38bdf8"/>
-  <circle cx="64" cy="50" r="5" fill="#ffffff"/>
+  <rect width="128" height="128" rx="30" fill="#e2e7ec"/>
+  <path d="m64 20 42 23v42l-42 23-42-23V43Z" fill="#f7f9fa" stroke="#728092" stroke-width="6"/>
+  <path d="m27 45 37 21 37-21M64 66v39" fill="none" stroke="#8693a2" stroke-width="6" stroke-linejoin="round"/>
+  <path d="m64 34 25 14-25 14-25-14Z" fill="#bdc9d4"/>
+  <circle cx="64" cy="48" r="7" fill="#77879a"/>
 </svg>

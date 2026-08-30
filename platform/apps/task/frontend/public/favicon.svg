@@ -1,11 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <!-- Solid Emerald Green Background -->
-  <rect width="128" height="128" rx="28" fill="#065f46"/>
-  <circle cx="64" cy="64" r="58" fill="#059669" stroke="#34d399" stroke-width="6"/>
-
-  <!-- Bold White High-Visibility Checkmark -->
-  <path d="M34 66 L54 86 L94 40" fill="none" stroke="#ffffff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Currency / Task Fast Lightning Pip -->
-  <circle cx="96" cy="32" r="10" fill="#fde047" stroke="#b45309" stroke-width="2"/>
+  <rect width="128" height="128" rx="30" fill="#e8dedb"/>
+  <rect x="25" y="22" width="78" height="84" rx="18" fill="#f8f4f1" stroke="#8a6d76" stroke-width="6"/>
+  <circle cx="43" cy="46" r="6" fill="#b58d87"/>
+  <circle cx="43" cy="65" r="6" fill="#b58d87"/>
+  <circle cx="43" cy="84" r="6" fill="#b58d87"/>
+  <path d="M58 46h25M58 65h25M58 84h18" stroke="#6f5961" stroke-width="7" stroke-linecap="round"/>
+  <path d="m78 83 8 8 15-19" fill="none" stroke="#7c696f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
