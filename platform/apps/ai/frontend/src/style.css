@@ -128,6 +128,71 @@
 .ai-cockpit .glass-card { border-color: var(--ai-line); border-radius: 18px; background: rgba(16,21,34,.92); color: #e9ebf2; box-shadow: 0 24px 70px rgba(0,0,0,.22); }
 .ai-cockpit .glass-input { border-color: #303849; background: #151b28; color: #eef0f5; }
 
+@media (min-width: 761px) {
+  .ai-topbar {
+    position: fixed !important;
+    inset: 0 auto 0 0 !important;
+    width: 92px !important;
+    height: 100vh !important;
+    padding: 18px 10px !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    border-right: 1px solid var(--ai-line) !important;
+  }
+  .ai-topbar > div:first-child {
+    width: 100%;
+    flex-direction: column-reverse;
+    gap: 14px;
+  }
+  .ai-topbar > div:first-child > button {
+    width: 42px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: var(--ai-line) !important;
+    background: #151b27 !important;
+  }
+  .ai-wordmark { justify-content: center; }
+  .ai-wordmark > div:last-child { display: none; }
+  .ai-mode-switcher {
+    width: 70px;
+    margin-block: auto;
+    padding: 5px !important;
+    flex-direction: column;
+    gap: 4px !important;
+  }
+  .ai-mode-tab {
+    width: 60px;
+    min-width: 60px;
+    min-height: 54px;
+    padding: 7px 3px !important;
+    flex-direction: column;
+    gap: 4px !important;
+    font-size: 10px;
+  }
+  .ai-mode-tab svg { width: 16px; height: 16px; }
+  .ai-topbar > div:last-child {
+    width: 100%;
+    flex-direction: column;
+  }
+  .ai-status { display: none !important; }
+  .ai-platform-link {
+    width: 48px;
+    height: 42px;
+    padding: 0 !important;
+    justify-content: center;
+  }
+  .ai-platform-link span { display: none !important; }
+  .ai-workspace {
+    width: calc(100% - 92px) !important;
+    height: 100vh;
+    margin-left: 92px;
+    padding: 18px !important;
+  }
+  .ai-chat-layout { height: calc(100vh - 36px) !important; }
+}
+
 @media (max-width: 760px) {
   .ai-topbar { height: auto !important; min-height: 70px; padding: 10px 12px !important; gap: 8px; flex-wrap: wrap; }
   .ai-mode-switcher { order: 3; width: 100%; overflow-x: auto; }

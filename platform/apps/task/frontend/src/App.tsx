@@ -1479,6 +1479,10 @@ export const App: React.FC = () => {
     return allMenuList.find((m) => m.id === activeMenu) || merchantOnboardingMenus[0];
   }, [allMenuList, activeMenu]);
 
+  const activeGroup = useMemo(() => {
+    return categoryGroups.find((group) => group.key === activeCategory) || categoryGroups[0];
+  }, [categoryGroups, activeCategory]);
+
   // Helper to generate current date YYYYMMDD
   const getTodayDate = () => {
     const now = new Date();
@@ -1879,6 +1883,78 @@ export const App: React.FC = () => {
 
       {/* Main Container */}
       <div className="task-workspace flex-1 flex w-full p-3 md:p-4 gap-4 overflow-hidden">
+        <div className="task-nav-stack">
+          <aside className="task-category-rail" aria-label="业务类别">
+            <div className="task-category-list">
+              <span className="task-rail-caption">业务域</span>
+              {categoryGroups.map((group, index) => {
+                const Icon = group.icon;
+                const isActive = activeCategory === group.key;
+                return (
+                  <button
+                    key={group.key}
+                    onClick={() => selectMenu(group.key, group.items[0].id)}
+                    className={isActive ? 'is-active' : ''}
+                    title={`${group.title} · ${group.items.length} 个接口`}
+                  >
+                    <span className="task-category-index">0{index + 1}</span>
+                    <Icon className="w-5 h-5" />
+                    <span>{group.title.slice(0, 2)}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <button
+              onClick={toggleSidebar}
+              className="task-rail-toggle"
+              title={sidebarCollapsed ? '展开接口目录' : '收起接口目录'}
+            >
+              {sidebarCollapsed ? <PanelLeftOpen className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
+            </button>
+          </aside>
+
+          {!sidebarCollapsed && (
+            <aside className="task-endpoint-panel" aria-label="接口目录">
+              <div className="task-endpoint-heading">
+                <div>
+                  <span>ACTIVE DOMAIN</span>
+                  <h2>{searchQuery ? '搜索结果' : activeGroup.title}</h2>
+                </div>
+                <strong>{filteredMenuList ? filteredMenuList.length : activeGroup.items.length}</strong>
+              </div>
+              <div className="task-endpoint-search">
+                <Search className="w-4 h-4" />
+                <input
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="搜索名称、路径或说明"
+                />
+                {searchQuery && (
+                  <button onClick={() => setSearchQuery('')} title="清空搜索">
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+              <div className="task-endpoint-list">
+                {(filteredMenuList || activeGroup.items).map((item, index) => (
+                  <button
+                    key={item.id}
+                    onClick={() => selectMenu(item.category, item.id)}
+                    className={activeMenu === item.id ? 'is-active' : ''}
+                  >
+                    <span className="task-endpoint-number">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="task-endpoint-name">{item.label}</span>
+                    <span className="task-endpoint-method">{item.method}</span>
+                  </button>
+                ))}
+                {(filteredMenuList || activeGroup.items).length === 0 && (
+                  <div className="task-endpoint-empty">没有匹配的接口</div>
+                )}
+              </div>
+            </aside>
+          )}
+        </div>
+
         {/* Left Sidebar */}
         <aside
           className={`task-directory border border-slate-200 bg-white rounded-xl py-3 flex flex-col justify-between transition-all duration-200 shrink-0 select-none shadow-xs overflow-hidden ${

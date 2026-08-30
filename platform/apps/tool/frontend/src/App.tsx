@@ -28,7 +28,7 @@ import { SnippetManager } from './components/SnippetManager';
 
 export const App: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
-    return window.innerWidth < 760 || localStorage.getItem('devtools_sidebar_collapsed') === 'true';
+    return window.innerWidth < 760;
   });
   const [activeCategory, setActiveCategory] = useState('codec');
 
@@ -143,6 +143,7 @@ export const App: React.FC = () => {
                   {!sidebarCollapsed && (
                     <div className="flex-1 min-w-0 text-left">
                       <div className="font-bold truncate text-[11px]">{item.label}</div>
+                      <div className="tool-nav-desc">{item.desc.split(',')[0]}</div>
                     </div>
                   )}
 
