@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Solid Emerald Green Background -->
+  <rect width="128" height="128" rx="28" fill="#065f46"/>
+  <circle cx="64" cy="64" r="58" fill="#059669" stroke="#34d399" stroke-width="6"/>
+
+  <!-- Bold White High-Visibility Checkmark -->
+  <path d="M34 66 L54 86 L94 40" fill="none" stroke="#ffffff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Currency / Task Fast Lightning Pip -->
+  <circle cx="96" cy="32" r="10" fill="#fde047" stroke="#b45309" stroke-width="2"/>
+</svg>

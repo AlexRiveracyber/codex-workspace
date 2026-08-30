@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Solid Cyber Cyan/Blue Background -->
+  <rect width="128" height="128" rx="28" fill="#0f172a"/>
+  <rect x="4" y="4" width="120" height="120" rx="24" fill="#0284c7" stroke="#38bdf8" stroke-width="4"/>
+
+  <!-- Left Code Bracket < -->
+  <path d="M44 34 L18 64 L44 94" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Right Code Bracket > -->
+  <path d="M84 34 L110 64 L84 94" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Center Golden Power Slash / Wrench Lightning -->
+  <polygon points="70,22 50,60 66,60 56,106 82,54 66,54" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+</svg>

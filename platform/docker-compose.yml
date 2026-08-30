@@ -1,0 +1,180 @@
+services:
+  # 1. MySQL 8.4 Database Container
+  platform-mysql:
+    image: mysql:8.4
+    container_name: platform-mysql
+    restart: unless-stopped
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PLATFORM_DB_PASSWORD:-root123456}
+      MYSQL_DATABASE: ${PLATFORM_DB_NAME:-platform_db}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - platform-mysql-data:/var/lib/mysql
+      - ./init-db.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - platform-network
+
+  # 2. Platform Management Backend (Java 21 + Spring Boot 3)
+  platform-api:
+    build:
+      context: ./apps/platform/backend
+      dockerfile: Dockerfile
+    image: platform-api:local
+    container_name: platform-platform-api
+    restart: unless-stopped
+    depends_on:
+      platform-mysql:
+        condition: service_healthy
+    environment:
+      DB_HOST: platform-mysql
+      DB_PORT: 3306
+      DB_NAME: ${PLATFORM_DB_NAME:-platform_db}
+      DB_USER: root
+      DB_PASSWORD: ${PLATFORM_DB_PASSWORD:-root123456}
+      SPRING_PROFILES_ACTIVE: prod
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "${PLATFORM_API_PORT:-8090}:8080"
+    networks:
+      - platform-network
+
+  # 3. Platform Web Console Frontend (React + Vite + Tailwind CSS)
+  platform-ui:
+    build:
+      context: ./apps/platform/frontend
+      dockerfile: Dockerfile
+    image: platform-ui:local
+    container_name: platform-platform-ui
+    restart: unless-stopped
+    depends_on:
+      - platform-api
+    ports:
+      - "${PLATFORM_UI_PORT:-3100}:3000"
+    networks:
+      - platform-network
+
+  # 4. Task Sub-App Backend (Java 21)
+  platform-task-api:
+    build:
+      context: ./apps/task/backend
+      dockerfile: Dockerfile
+    image: platform-task-api:local
+    container_name: platform-task-api
+    restart: unless-stopped
+    depends_on:
+      platform-mysql:
+        condition: service_healthy
+    environment:
+      DB_HOST: platform-mysql
+      DB_PORT: 3306
+      DB_NAME: ${PLATFORM_DB_NAME:-platform_db}
+      DB_USER: root
+      DB_PASSWORD: ${PLATFORM_DB_PASSWORD:-root123456}
+    ports:
+      - "${TASK_API_PORT:-8082}:8082"
+    networks:
+      - platform-network
+
+  # 5. Task Sub-App Frontend (React)
+  platform-task-ui:
+    build:
+      context: ./apps/task/frontend
+      dockerfile: Dockerfile
+    image: platform-task-ui:local
+    container_name: platform-task-ui
+    restart: unless-stopped
+    depends_on:
+      - platform-task-api
+    ports:
+      - "${TASK_UI_PORT:-3002}:80"
+    networks:
+      - platform-network
+
+  # 6. AI Sub-App Backend (Java 21)
+  platform-ai-api:
+    build:
+      context: ./apps/ai/backend
+      dockerfile: Dockerfile
+    image: platform-ai-api:local
+    container_name: platform-ai-api
+    restart: unless-stopped
+    depends_on:
+      platform-mysql:
+        condition: service_healthy
+    environment:
+      DB_HOST: platform-mysql
+      DB_PORT: 3306
+      DB_NAME: ${PLATFORM_DB_NAME:-platform_db}
+      DB_USER: root
+      DB_PASSWORD: ${PLATFORM_DB_PASSWORD:-root123456}
+    ports:
+      - "${AI_API_PORT:-8083}:8083"
+    networks:
+      - platform-network
+
+  # 7. AI Sub-App Frontend (React)
+  platform-ai-ui:
+    build:
+      context: ./apps/ai/frontend
+      dockerfile: Dockerfile
+    image: platform-ai-ui:local
+    container_name: platform-ai-ui
+    restart: unless-stopped
+    depends_on:
+      - platform-ai-api
+    ports:
+      - "${AI_UI_PORT:-3003}:80"
+    networks:
+      - platform-network
+
+  # 8. DevTools Sub-App Backend (Java 21)
+  platform-tool-api:
+    build:
+      context: ./apps/tool/backend
+      dockerfile: Dockerfile
+    image: platform-tool-api:local
+    container_name: platform-tool-api
+    restart: unless-stopped
+    depends_on:
+      platform-mysql:
+        condition: service_healthy
+    environment:
+      DB_HOST: platform-mysql
+      DB_PORT: 3306
+      DB_NAME: ${PLATFORM_DB_NAME:-platform_db}
+      DB_USER: root
+      DB_PASSWORD: ${PLATFORM_DB_PASSWORD:-root123456}
+    ports:
+      - "${TOOL_API_PORT:-8084}:8084"
+    networks:
+      - platform-network
+
+  # 9. DevTools Sub-App Frontend (React)
+  platform-tool-ui:
+    build:
+      context: ./apps/tool/frontend
+      dockerfile: Dockerfile
+    image: platform-tool-ui:local
+    container_name: platform-tool-ui
+    restart: unless-stopped
+    depends_on:
+      - platform-tool-api
+    ports:
+      - "${TOOL_UI_PORT:-3004}:80"
+    networks:
+      - platform-network
+
+volumes:
+  platform-mysql-data:
+
+networks:
+  platform-network:
+    driver: bridge
