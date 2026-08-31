@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    margin: 0;
+    background-color: #dfe2dc;
+    color: #1e293b;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Toolbox — a crisp, high-contrast developer utility deck. */
+.tool-workbench {
+  --tool-ink: #151816;
+  --tool-acid: #dfff64;
+  --tool-orange: #ff7657;
+  --tool-paper: #eef0eb;
+  min-height: 100vh;
+  background: var(--tool-paper) !important;
+}
+.tool-topbar {
+  height: 72px !important;
+  padding-inline: 22px !important;
+  border: 0 !important;
+  background: var(--tool-ink) !important;
+  box-shadow: none !important;
+}
+.tool-topbar > div:first-child > button { border-color: #3b403c !important; border-radius: 3px !important; background: #222622 !important; color: #c8cec8 !important; }
+.tool-brand-mark { width: 39px !important; height: 39px !important; border: 0 !important; border-radius: 3px !important; background: var(--tool-acid) !important; color: #151816 !important; transform: rotate(-2deg); }
+.tool-eyebrow { margin-bottom: 2px; color: #818981; font: 600 8px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; }
+.tool-title { color: #f5f7f1 !important; font-size: 17px !important; letter-spacing: -.02em; }
+.tool-wordmark span { border-color: #3a403a !important; border-radius: 2px !important; background: #242824 !important; color: #b9c0b9 !important; }
+.tool-status { border-color: #3b413b !important; border-radius: 3px !important; background: #222622 !important; }
+.tool-status .text-slate-500 { color: #8d958e !important; }
+.tool-status .text-emerald-700 { color: var(--tool-acid) !important; }
+.tool-platform-link { border-color: #3b413b !important; border-radius: 3px !important; background: #292e29 !important; color: #e2e7e1 !important; }
+.tool-platform-link:hover { background: var(--tool-acid) !important; color: #151816 !important; }
+
+.tool-layout { padding: 0 !important; gap: 0 !important; }
+.tool-rail {
+  width: 250px !important;
+  padding: 22px 14px !important;
+  border: 0 !important;
+  border-right: 1px solid #353a35 !important;
+  border-radius: 0 !important;
+  background: #1c201c !important;
+  box-shadow: none !important;
+}
+.tool-rail.w-14 { width: 68px !important; }
+.tool-rail .uppercase { color: #707870 !important; letter-spacing: .17em !important; }
+.tool-rail button { min-height: 40px; border-radius: 3px !important; }
+.tool-rail button.bg-blue-50 { border-color: var(--tool-acid) !important; background: var(--tool-acid) !important; color: #171a17 !important; box-shadow: 4px 4px 0 #56651e !important; }
+.tool-rail button.bg-blue-50 svg { color: #171a17 !important; }
+.tool-rail button.text-slate-600 { color: #a9b0aa !important; }
+.tool-rail button.text-slate-600:hover { background: #2a302a !important; color: #fff !important; }
+.tool-rail > div:last-child { border-color: #373d37 !important; background: #242924 !important; color: #919991 !important; }
+.tool-rail > div:last-child .text-slate-800 { color: #eef2ec !important; }
+.tool-rail > div:last-child .text-blue-600 { color: var(--tool-acid) !important; }
+
+.tool-main { padding: 26px clamp(18px, 3vw, 42px) 50px !important; }
+.tool-deck-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 3px solid var(--tool-ink); }
+.tool-deck-index { display: block; margin-bottom: 7px; color: #646b64; font: 700 9px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; }
+.tool-deck-header h2 { margin: 0; color: var(--tool-ink); font-size: clamp(25px, 3vw, 38px); line-height: .98; letter-spacing: -.045em; }
+.tool-deck-header p { margin: 8px 0 0; color: #656c65; font: 500 12px ui-monospace, SFMono-Regular, Menlo, monospace; }
+.tool-deck-icon { width: 42px; height: 42px; padding: 9px; border: 2px solid var(--tool-ink); background: var(--tool-orange); color: var(--tool-ink); }
+
+.tool-workbench .bg-white { background-color: #f9faf6 !important; }
+.tool-workbench .tool-rail { background: #1c201c !important; }
+.tool-workbench .border-slate-200 { border-color: #c9cdc5 !important; }
+.tool-workbench .rounded-xl { border-radius: 5px !important; }
+.tool-main .bg-white { box-shadow: 4px 4px 0 rgba(21,24,22,.13) !important; }
+.tool-main .bg-slate-100 { background-color: #d9ddd5 !important; }
+.tool-main .bg-slate-50 { background-color: #eef0eb !important; }
+.tool-main .bg-blue-600 { background-color: var(--tool-ink) !important; color: var(--tool-acid) !important; }
+.tool-main .hover\:bg-blue-700:hover { background-color: #343a34 !important; }
+.tool-main .text-blue-600, .tool-main .text-blue-700 { color: #394f00 !important; }
+.tool-main .border-blue-200 { border-color: #a9b77a !important; }
+.tool-main .bg-blue-50 { background-color: #efffc0 !important; }
+.tool-main input:focus, .tool-main textarea:focus, .tool-main select:focus { border-color: #596d18 !important; box-shadow: 0 0 0 3px rgba(130,157,42,.16); }
+
+/* Calm light workbench — soft sage navigation and restrained selection states. */
+.tool-workbench {
+  --tool-ink: #59645b;
+  --tool-acid: #d7dfd1;
+  --tool-orange: #c8a494;
+  --tool-paper: #f0f2ee;
+}
+.tool-topbar { border-bottom: 1px solid #cfd5cd !important; background: #e5e9e3 !important; }
+.tool-topbar > div:first-child > button { border-color: #c8cfc7 !important; background: #f4f6f2 !important; color: #657067 !important; }
+.tool-brand-mark { background: #ced8ca !important; color: #59645b !important; }
+.tool-eyebrow { color: #858f86; }
+.tool-title { color: #4f5951 !important; }
+.tool-wordmark span { border-color: #cbd2ca !important; background: #f4f6f2 !important; color: #717b73 !important; }
+.tool-status { border-color: #cbd2ca !important; background: #f4f6f2 !important; }
+.tool-status .text-slate-500 { color: #808a82 !important; }
+.tool-status .text-emerald-700 { color: #61725f !important; }
+.tool-platform-link { border-color: #cbd2ca !important; background: #f4f6f2 !important; color: #606b62 !important; }
+.tool-platform-link:hover { background: #d8dfd5 !important; color: #525c54 !important; }
+.tool-rail,
+.tool-workbench .tool-rail { border-color: #cbd2ca !important; background: #e9ede7 !important; }
+.tool-rail .uppercase { color: #89928a !important; }
+.tool-rail button.bg-blue-50 { border-color: #bcc8b9 !important; background: #d7dfd3 !important; color: #536055 !important; box-shadow: none !important; }
+.tool-rail button.bg-blue-50 svg { color: #5c685e !important; }
+.tool-rail button.text-slate-600 { color: #68736a !important; }
+.tool-rail button.text-slate-600:hover { background: #dde3da !important; color: #505b52 !important; }
+.tool-rail > div:last-child { border-color: #cdd4cc !important; background: #f3f5f1 !important; color: #737d75 !important; }
+.tool-rail > div:last-child .text-slate-800 { color: #515c53 !important; }
+.tool-rail > div:last-child .text-blue-600 { color: #62705f !important; }
+.tool-main .bg-blue-600 { background-color: #657268 !important; color: #f5f7f3 !important; }
+.tool-main .hover\:bg-blue-700:hover { background-color: #566159 !important; }
+.tool-main .text-blue-600,
+.tool-main .text-blue-700 { color: #5f7061 !important; }
+.tool-main .border-blue-200 { border-color: #b8c4b6 !important; }
+.tool-main .bg-blue-50 { background-color: #e2e8df !important; }
+.tool-deck-icon { border-color: #707b72; background: #d3b9ad; color: #59645b; }
+
+@media (min-width: 761px) {
+  .tool-topbar > div:first-child > button { display: none !important; }
+  .tool-layout { flex-direction: column !important; overflow: hidden; }
+  .tool-rail,
+  .tool-rail.w-14 {
+    width: 100% !important;
+    min-height: 86px;
+    padding: 10px 22px !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid #353a35 !important;
+  }
+  .tool-rail > div:first-child {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    gap: 7px;
+  }
+  .tool-rail > div:first-child > div:first-child {
+    width: 58px;
+    padding: 8px 8px 0 !important;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    writing-mode: vertical-rl;
+  }
+  .tool-rail button {
+    width: auto !important;
+    min-width: 132px;
+    min-height: 62px;
+    padding: 9px 10px !important;
+    flex: 1 0 132px;
+  }
+  .tool-rail button > div { display: block !important; }
+  .tool-rail > div:last-child { display: none !important; }
+  .tool-nav-desc { margin-top: 4px; color: #7d877e; font: 500 8px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tool-rail button.text-slate-600 .tool-nav-desc { color: #6f786f; }
+  .tool-rail button.bg-blue-50 .tool-nav-desc { color: #475511; }
+  .tool-main { flex: 1; width: 100%; padding-top: 22px !important; }
+}
+
+@media (max-width: 760px) {
+  .tool-topbar { height: 66px !important; padding-inline: 12px !important; }
+  .tool-status { display: none !important; }
+  .tool-rail { width: 68px !important; padding-inline: 8px !important; }
+  .tool-rail > div > div:first-child, .tool-rail button > div { display: none !important; }
+  .tool-main { padding: 18px 12px 36px !important; }
+  .tool-deck-header p { max-width: 230px; }
+}
+
+/* Custom smooth light scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Panels and Cards matching Task Studio light theme */
+.glass-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.glass-panel-hover {
+  transition: all 0.2s ease-out;
+}
+
+.glass-panel-hover:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07);
+}
+
+.glass-modal {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.glass-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.glass-input {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+}
+
+.status-dot-running {
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+}
+
+.status-dot-stopped {
+  box-shadow: 0 0 4px rgba(148, 163, 184, 0.4);
+}
+
+.status-dot-error {
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
+}

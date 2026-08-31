@@ -1,0 +1,16 @@
+package com.platform.repository;
+
+import com.platform.entity.AppLog;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface AppLogRepository extends JpaRepository<AppLog, Long> {
+    List<AppLog> findByAppIdOrderByCreatedAtDesc(Long appId);
+    Page<AppLog> findAllByOrderByCreatedAtDesc(Pageable pageable);
+    List<AppLog> findTop20ByOrderByCreatedAtDesc();
+}

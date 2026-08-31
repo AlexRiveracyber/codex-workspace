@@ -1,0 +1,45 @@
+# Java & Maven
+target/
+**/target/
+*.jar
+*.war
+*.ear
+*.class
+.mvn/
+mvnw
+mvnw.cmd
+
+# Node & frontend
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+dist-ssr/
+*.local
+.npm
+.eslintcache
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# IDEs and operating systems
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and local runtime data
+*.log
+logs/
+.docker/
