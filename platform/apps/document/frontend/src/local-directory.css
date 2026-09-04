@@ -17,3 +17,73 @@
 .directory-input {
   display: none;
 }
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(23, 32, 51, .38);
+  backdrop-filter: blur(3px);
+}
+
+.directory-dialog {
+  width: min(420px, 100%);
+  padding: 28px;
+  border: 1px solid #e1e7ea;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(23, 32, 51, .2);
+  text-align: center;
+}
+
+.directory-dialog > span {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 14px;
+  place-items: center;
+  border-radius: 14px;
+  background: #fff7e5;
+  color: #a96719;
+}
+
+.directory-dialog > span svg {
+  width: 24px;
+}
+
+.directory-dialog h2 {
+  margin: 0;
+  color: #172033;
+  font-size: 17px;
+}
+
+.directory-dialog p {
+  margin: 12px 0 22px;
+  color: #748194;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.directory-dialog > div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+}
+
+.directory-dialog button {
+  width: auto;
+  padding: 9px 15px;
+  border: 1px solid #dbe2e7;
+  background: #fff;
+  color: #687587;
+  font-weight: 700;
+}
+
+.directory-dialog button.primary {
+  border-color: #a96719;
+  background: #a96719;
+  color: #fff;
+}
