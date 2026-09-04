@@ -20,6 +20,15 @@
   display: none;
 }
 
+.focus-preview > .preview {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  width: 100vw;
+  height: 100vh;
+  background: #f3f5f7;
+}
+
 .preview {
   min-height: 0;
   overflow: hidden;
@@ -77,16 +86,16 @@
 }
 
 .word-preview {
-  width: min(860px, 100%);
+  width: min(1100px, 100%);
   min-height: 100%;
   margin: 0 auto;
-  padding: 54px 64px;
+  padding: 64px 82px;
   border: 1px solid #dbe2e7;
   border-radius: 4px;
   background: #fff;
   box-shadow: 0 4px 18px rgba(28, 45, 57, .08);
   color: #263244;
-  font: 14px/1.8 "Microsoft YaHei", sans-serif;
+  font: 16px/1.85 "Microsoft YaHei", sans-serif;
 }
 
 .word-preview img {
