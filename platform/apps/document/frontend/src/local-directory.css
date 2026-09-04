@@ -1,0 +1,19 @@
+.mount .choose-folder {
+  justify-content: center;
+  margin-top: 11px;
+  padding: 8px;
+  border: 1px solid #e5d2b4;
+  background: #fff7e5;
+  color: #a96719;
+  font-weight: 700;
+}
+
+.mount .choose-folder:hover {
+  background: #ffefd0;
+  color: #8a5313;
+  box-shadow: none;
+}
+
+.directory-input {
+  display: none;
+}
