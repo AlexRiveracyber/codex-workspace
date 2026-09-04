@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { BookOpen, Clock3, File, FileImage, FileSpreadsheet, FileText, Folder, HardDrive, Presentation, RefreshCw, Search, Star } from 'lucide-react';
+import { BookOpen, Clock3, File, FileImage, FileSpreadsheet, FileText, Folder, HardDrive, Maximize2, Minimize2, Presentation, RefreshCw, Search, Star } from 'lucide-react';
 import { ImagePreview } from './ImagePreview';
+import { WordPreview } from './WordPreview';
 
 type DocumentItem = { id: string; name: string; path: string; extension: string; size: number; modified: string; favorite?: boolean; sourceFile?: File };
 type Library = { name: string; root: string; documents: DocumentItem[] };
@@ -23,6 +24,7 @@ export const App: React.FC = () => {
   const [selected,setSelected]=useState<DocumentItem>(demos[0]);
   const [query,setQuery]=useState(''); const [folder,setFolder]=useState('全部文档'); const [filter,setFilter]=useState('all');
   const [loading,setLoading]=useState(true); const [error,setError]=useState(''); const [previewText,setPreviewText]=useState(''); const [previewUrl,setPreviewUrl]=useState('');
+  const [focusPreview,setFocusPreview]=useState(false);
   const directoryInput=useRef<HTMLInputElement>(null);
   const load=async()=>{setLoading(true);try{const res=await fetch('/api/documents');if(!res.ok)throw new Error();const data:Library=await res.json();setLibrary({...data,documents:data.documents.length?data.documents:demos});if(data.documents[0])setSelected(data.documents[0]);setError(data.documents.length?'':'挂载目录暂无文档，正在展示示例');}catch{setError('Document API 暂不可用，正在展示示例');}finally{setLoading(false);}};
   useEffect(()=>{load();},[]);
@@ -34,10 +36,10 @@ export const App: React.FC = () => {
   const Icon=icon(selected.extension); const url=previewUrl||`/api/documents/content?path=${encodeURIComponent(selected.id)}`;
   return <div className="app">
     <header><div className="brand"><span><BookOpen/></span><div><h1>Document Center</h1><p>本地文档浏览与检索中心 · Port 3005</p></div></div><div className="status"><i/>{loading?'正在扫描':'目录已同步'}<button onClick={load} title="重新扫描"><RefreshCw/></button></div></header>
-    <main>
+    <main className={focusPreview?'focus-preview':''}>
       <aside><div className="library"><HardDrive/><div><b>{library.name}</b><small>{library.documents.length} 个文档</small></div></div><label>资料库</label><button className={folder==='全部文档'?'active':''} onClick={()=>setFolder('全部文档')}><HardDrive/>全部文档<em>{library.documents.length}</em></button><button><Star/>我的收藏<em>{library.documents.filter(d=>d.favorite).length}</em></button><label>文件夹</label>{folders.slice(1).map(f=><button key={f} className={folder===f?'active':''} onClick={()=>setFolder(f)}><Folder/>{f}</button>)}<div className="mount"><Folder/><b>本地目录</b><p>{library.root}</p><small>选择后仅在当前浏览器中只读扫描，不会上传文件</small><button className="choose-folder" onClick={()=>directoryInput.current?.click()}><Folder/>选择本地目录</button><input ref={directoryInput} className="directory-input" type="file" multiple onChange={e=>chooseDirectory(e.target.files)}/></div></aside>
       <section className="files"><div className="search"><Search/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="搜索文件名或路径…"/></div><div className="filters">{[['all','全部'],['office','Office'],['pdf','PDF'],['image','图片'],['text','文本']].map(([id,name])=><button key={id} className={filter===id?'active':''} onClick={()=>setFilter(id)}>{name}</button>)}</div>{error&&<div className="notice">{error}</div>}<div className="list">{shown.map(d=>{const I=icon(d.extension);return <button key={d.id} className={selected.id===d.id?'selected':''} onClick={()=>setSelected(d)}><span className={tone(d.extension)}><I/></span><div><b>{d.name}</b><small>{d.path} · {fmt(d.size)}</small></div>{d.favorite&&<Star className="fav"/>}</button>})}</div></section>
-      <section className="preview"><div className="preview-head"><div><b>{selected.name}</b><small><Clock3/>{new Date(selected.modified).toLocaleString('zh-CN',{hour12:false})}</small></div><a href={url} download>下载原文件</a></div><div className={`canvas ${images.has(selected.extension)?'image-canvas':''}`}>{selected.extension==='pdf'?<iframe src={url} title={selected.name}/>:images.has(selected.extension)?<ImagePreview src={url} alt={selected.name}/>:previewText?<pre>{previewText}</pre>:<div className="unsupported"><span className={tone(selected.extension)}><Icon/></span><h2>{selected.name}</h2><p>{office.has(selected.extension)?'Office 文档已完成索引。下一阶段接入 LibreOffice 转换服务后，可在这里直接分页预览。':'选择左侧文档查看内容。'}</p><em>{selected.extension.toUpperCase()}</em></div>}</div></section>
+      <section className="preview"><div className="preview-head"><div><b>{selected.name}</b><small><Clock3/>{new Date(selected.modified).toLocaleString('zh-CN',{hour12:false})}</small></div><div className="preview-actions"><button onClick={()=>setFocusPreview(value=>!value)} title={focusPreview?'退出专注预览':'专注预览'}>{focusPreview?<Minimize2/>:<Maximize2/>}{focusPreview?'退出专注':'专注预览'}</button><a href={url} download>下载原文件</a></div></div><div className={`canvas ${images.has(selected.extension)?'image-canvas':''} ${selected.extension==='docx'?'word-canvas':''}`}>{selected.extension==='pdf'?<iframe src={url} title={selected.name}/>:images.has(selected.extension)?<ImagePreview src={url} alt={selected.name}/>:selected.extension==='docx'?<WordPreview url={url} sourceFile={selected.sourceFile}/>:previewText?<pre>{previewText}</pre>:<div className="unsupported"><span className={tone(selected.extension)}><Icon/></span><h2>{selected.name}</h2><p>{office.has(selected.extension)?'该格式暂不支持在线预览，请下载原文件查看。':'选择左侧文档查看内容。'}</p><em>{selected.extension.toUpperCase()}</em></div>}</div></section>
     </main>
   </div>;
 };

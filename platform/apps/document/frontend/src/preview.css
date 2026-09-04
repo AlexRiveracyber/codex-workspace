@@ -11,6 +11,15 @@
   overflow: hidden;
 }
 
+.app main.focus-preview {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.focus-preview > aside,
+.focus-preview > .files {
+  display: none;
+}
+
 .preview {
   min-height: 0;
   overflow: hidden;
@@ -31,6 +40,70 @@
   max-height: 100%;
   padding: 0;
   object-fit: contain;
+}
+
+.preview-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.preview-head .preview-actions button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px;
+  border: 1px solid #dbe2e7;
+  border-radius: 8px;
+  background: #fff;
+  color: #687587;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.preview-head .preview-actions svg {
+  width: 12px;
+}
+
+.word-canvas {
+  overflow: auto;
+  background: #e9edf1;
+}
+
+.word-preview {
+  width: min(860px, 100%);
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 54px 64px;
+  border: 1px solid #dbe2e7;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(28, 45, 57, .08);
+  color: #263244;
+  font: 14px/1.8 "Microsoft YaHei", sans-serif;
+}
+
+.word-preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+.word-preview table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.word-preview td,
+.word-preview th {
+  padding: 6px 8px;
+  border: 1px solid #cfd7df;
+}
+
+.word-state {
+  margin: auto;
+  color: #7f8b9b;
+  font-size: 12px;
 }
 
 .canvas.image-canvas canvas {
