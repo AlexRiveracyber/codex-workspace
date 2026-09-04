@@ -55,12 +55,15 @@
 .ai-brand-mark {
   width: 38px !important;
   height: 38px !important;
-  border-radius: 16px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  border-radius: 9999px !important;
   color: var(--ai-ink) !important;
   border: 0 !important;
   background: var(--ai-lime) !important;
   box-shadow: 0 0 32px rgba(200,255,114,.16) !important;
 }
+.ai-brand-mark > span { border-radius: inherit; }
 
 .ai-wordmark span { border-color: #30384b !important; background: #161c29 !important; color: #aab3c7 !important; }
 .ai-mode-switcher { padding: 4px !important; border-color: var(--ai-line) !important; border-radius: 12px !important; background: #111622 !important; }
