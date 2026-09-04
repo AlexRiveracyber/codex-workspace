@@ -1,3 +1,16 @@
+.app main {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.app aside,
+.files {
+  min-height: 0;
+}
+
+.files {
+  overflow: hidden;
+}
+
 .preview {
   min-height: 0;
   overflow: hidden;
