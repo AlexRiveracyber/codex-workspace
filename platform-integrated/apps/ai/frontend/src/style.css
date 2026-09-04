@@ -57,7 +57,7 @@
   height: 38px !important;
   padding: 0 !important;
   overflow: hidden;
-  border-radius: 9999px !important;
+  border-radius: 9px !important;
   color: var(--ai-ink) !important;
   border: 0 !important;
   background: var(--ai-lime) !important;

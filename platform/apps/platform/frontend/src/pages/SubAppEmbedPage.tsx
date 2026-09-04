@@ -45,6 +45,7 @@ export const SubAppEmbedPage: React.FC<SubAppEmbedPageProps> = ({ appType }) => 
   const current = configs[appType] || configs.task;
   const Icon = current.icon;
   const [iframeKey, setIframeKey] = React.useState(0);
+  const iframeUrl = `${current.url}?embedded=platform&ui=20260904.3`;
 
   return (
     <div className="flex flex-col h-[calc(100vh-5.5rem)] space-y-3 animate-in fade-in duration-200">
@@ -80,7 +81,7 @@ export const SubAppEmbedPage: React.FC<SubAppEmbedPageProps> = ({ appType }) => 
             rel="noreferrer"
             className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-xs transition cursor-pointer"
           >
-            <span>新标签页全屏独立打开</span>
+            <span>在新标签中打开</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
@@ -90,7 +91,7 @@ export const SubAppEmbedPage: React.FC<SubAppEmbedPageProps> = ({ appType }) => 
       <div className="flex-1 w-full rounded-xl overflow-hidden border border-slate-200 bg-white shadow-xs relative">
         <iframe
           key={iframeKey}
-          src={current.url}
+          src={iframeUrl}
           title={current.name}
           className="w-full h-full border-0 rounded-xl"
         />

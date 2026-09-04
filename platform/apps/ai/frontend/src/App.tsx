@@ -25,6 +25,7 @@ import {
   Mic,
   Eye,
   Flame,
+  X,
 } from 'lucide-react';
 
 import { aiApi } from './api';
@@ -37,7 +38,7 @@ import { VideoPlayerModal } from './components/VideoPlayerModal';
 export const App: React.FC = () => {
   const [activeNavTab, setActiveNavTab] = useState<'chat' | 'models' | 'providers' | 'logs'>('chat');
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
-    return window.innerWidth < 760 || localStorage.getItem('ai_sidebar_collapsed') === 'true';
+    return localStorage.getItem('ai_history_drawer_open') !== 'true';
   });
 
   // Conversations & Chat
@@ -70,7 +71,7 @@ export const App: React.FC = () => {
   const toggleSidebar = () => {
     setSidebarCollapsed((prev) => {
       const next = !prev;
-      localStorage.setItem('ai_sidebar_collapsed', String(next));
+      localStorage.setItem('ai_history_drawer_open', String(!next));
       return next;
     });
   };
@@ -397,22 +398,34 @@ export const App: React.FC = () => {
       <div className="ai-workspace flex-1 flex w-full p-3 md:p-4 gap-3 md:gap-4 overflow-hidden">
         {/* ================= TAB 1: Chat Workspace ================= */}
         {activeNavTab === 'chat' && (
-          <div className="ai-chat-layout flex-1 flex gap-3 md:gap-4 w-full h-[calc(100vh-5rem)]">
-            {/* Collapsible Left Conversations Sidebar */}
-            {!sidebarCollapsed && <aside className="ai-thread-rail w-64 border border-slate-200 bg-white rounded-xl p-3 flex flex-col justify-between transition-all duration-200 shrink-0 select-none overflow-hidden shadow-xs">
+          <div className="ai-chat-layout relative flex-1 flex w-full h-[calc(100vh-5rem)]">
+            {/* On-demand conversation history drawer */}
+            {!sidebarCollapsed && <aside className="ai-thread-rail absolute inset-y-0 left-0 z-30 w-72 border border-slate-200 bg-white rounded-xl p-3 flex flex-col justify-between transition-all duration-200 select-none overflow-hidden shadow-xs">
               <div className="space-y-3 flex-1 flex flex-col min-h-0 w-full">
                 <div className="flex items-center justify-between px-1">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">会话记录</span>
-                  <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-500">{conversations.length}</span>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">历史会话</p>
+                    <p className="mt-1 text-[10px] text-slate-400">{conversations.length} 条记录</p>
+                  </div>
+                  <button type="button" onClick={toggleSidebar} aria-label="关闭历史会话" className="rounded-lg p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700">
+                    <X className="h-3.5 w-3.5" />
+                  </button>
                 </div>
 
                 <div className="flex-1 overflow-y-auto space-y-1 pr-1">
+                  {conversations.length === 0 && (
+                    <div className="rounded-xl border border-dashed border-slate-200 px-3 py-6 text-center text-[11px] text-slate-400">暂无历史会话</div>
+                  )}
                   {conversations.map((conv) => {
                     const isSelected = currentConvId === conv.id;
                     return (
                       <div
                         key={conv.id}
-                        onClick={() => switchConversation(conv.id)}
+                        onClick={() => {
+                          switchConversation(conv.id);
+                          setSidebarCollapsed(true);
+                          localStorage.setItem('ai_history_drawer_open', 'false');
+                        }}
                         className={`p-2 rounded-lg text-xs transition cursor-pointer border flex items-center justify-between group ${
                           isSelected
                             ? 'bg-blue-50 text-blue-700 border-blue-200 shadow-xs font-semibold'
@@ -580,6 +593,19 @@ export const App: React.FC = () => {
 
                 {/* Right Quick Controls */}
                 <div className="flex items-center gap-2">
+                  <button
+                    onClick={toggleSidebar}
+                    className={`px-2.5 py-1 rounded-lg text-xs border transition cursor-pointer flex items-center gap-1 font-medium ${
+                      sidebarCollapsed
+                        ? 'bg-slate-100 hover:bg-slate-200 text-slate-600 border-slate-200'
+                        : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border-indigo-100'
+                    }`}
+                    title={sidebarCollapsed ? '打开历史会话' : '关闭历史会话'}
+                  >
+                    <MessageSquare className="w-3 h-3" />
+                    <span>历史</span>
+                    {conversations.length > 0 && <span className="ml-0.5 rounded bg-white/80 px-1 text-[9px]">{conversations.length}</span>}
+                  </button>
                   <button
                     onClick={handleCreateConversation}
                     className="px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs border border-indigo-100 transition cursor-pointer flex items-center gap-1 font-semibold"
