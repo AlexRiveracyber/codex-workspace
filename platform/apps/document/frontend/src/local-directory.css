@@ -67,7 +67,7 @@
   line-height: 1.8;
 }
 
-.directory-dialog > div {
+.directory-dialog-actions {
   display: flex;
   justify-content: flex-end;
   gap: 9px;
@@ -82,8 +82,43 @@
   font-weight: 700;
 }
 
-.directory-dialog button.primary {
+.directory-dialog button.secondary {
+  border-color: #e5d2b4;
+  background: #fff7e5;
+  color: #a96719;
+}
+
+.directory-dropzone {
+  display: flex;
+  min-height: 150px;
+  margin: 0 0 20px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px dashed #cbd4da;
+  border-radius: 12px;
+  background: #f8fafb;
+  color: #657286;
+  transition: .16s ease;
+}
+
+.directory-dropzone.dragging {
   border-color: #a96719;
-  background: #a96719;
-  color: #fff;
+  background: #fff7e5;
+  color: #a96719;
+  transform: scale(1.01);
+}
+
+.directory-dropzone svg {
+  width: 28px;
+}
+
+.directory-dropzone b {
+  font-size: 12px;
+}
+
+.directory-dropzone small {
+  color: #94a0af;
+  font-size: 9px;
 }
