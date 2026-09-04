@@ -16,6 +16,7 @@ import { TemplatesPage } from './pages/TemplatesPage';
 import { LogsPage } from './pages/LogsPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { SubAppEmbedPage } from './pages/SubAppEmbedPage';
+import { DocumentCenterPage } from './pages/DocumentCenterPage';
 
 import { dockerApi, appsApi, templatesApi } from './api';
 import type { ManagedApp, AppTemplate, DockerContainer } from './types';
@@ -205,7 +206,6 @@ export const App: React.FC = () => {
             appCount={appCount}
             collapsed={sidebarCollapsed}
             mobileOpen={mobileSidebarOpen}
-            onToggle={toggleSidebar}
             onMobileClose={() => setMobileSidebarOpen(false)}
           />
 
@@ -260,6 +260,7 @@ export const App: React.FC = () => {
                   path="/subapps/tool"
                   element={<SubAppEmbedPage appType="tool" />}
                 />
+                <Route path="/documents" element={<DocumentCenterPage />} />
                 <Route path="/logs" element={<LogsPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
               </Routes>

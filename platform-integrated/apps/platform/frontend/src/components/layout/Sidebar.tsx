@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
-  Boxes, CheckSquare2, ChevronLeft, ChevronRight, Container, LayoutDashboard,
-  ScrollText, Settings, Sparkles, Store, Wrench, X,
+  Boxes, CheckSquare2, Container, LayoutDashboard,
+  BookOpen, ScrollText, Settings, Sparkles, Store, Wrench, X,
 } from 'lucide-react';
 
 interface SidebarProps {
   appCount: number;
   collapsed: boolean;
   mobileOpen: boolean;
-  onToggle: () => void;
   onMobileClose: () => void;
 }
 
@@ -30,6 +29,7 @@ const mainNav: NavItem[] = [
   { to: '/templates', label: '模板市场', icon: Store },
 ];
 const subAppNav: NavItem[] = [
+  { to: '/documents', label: '文档中心', icon: BookOpen, accent: 'bg-amber-300' },
   { to: '/subapps/task', label: 'Task Flow', icon: CheckSquare2, accent: 'bg-rose-300', route: '/task/' },
   { to: '/subapps/ai', label: 'Lumen AI', icon: Sparkles, accent: 'bg-indigo-300', route: '/ai/' },
   { to: '/subapps/tool', label: 'DevTools', icon: Wrench, accent: 'bg-emerald-300', route: '/tool/' },
@@ -39,7 +39,7 @@ const sysNav: NavItem[] = [
   { to: '/settings', label: '系统设置', icon: Settings },
 ];
 
-export const Sidebar: React.FC<SidebarProps> = ({ appCount, collapsed, mobileOpen, onToggle, onMobileClose }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ appCount, collapsed, mobileOpen, onMobileClose }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -80,7 +80,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ appCount, collapsed, mobileOpe
         <div className={`flex-1 space-y-6 overflow-y-auto overflow-x-hidden py-5 ${collapsed ? 'px-2.5' : 'px-3'}`}>
           <nav>{!collapsed && <p className="sidebar-label">Workspace</p>}<div className="space-y-1">{renderItems(mainNav)}</div></nav>
           <nav>
-            {!collapsed && <div className="mb-2 flex items-center justify-between px-3"><p className="sidebar-label !mb-0 !px-0">Modules</p><span className="text-[9px] font-bold text-slate-500">ONE RUNTIME</span></div>}
+            {!collapsed && <div className="mb-2 flex items-center justify-between px-3"><p className="sidebar-label !mb-0 !px-0">Modules</p><span className="text-[9px] font-bold text-slate-500">4 APPS</span></div>}
             <div className="space-y-1">{renderItems(subAppNav)}</div>
           </nav>
           <nav>{!collapsed && <p className="sidebar-label">System</p>}<div className="space-y-1">{renderItems(sysNav)}</div></nav>
@@ -93,10 +93,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ appCount, collapsed, mobileOpe
               <p className="mt-2 text-[9px] leading-relaxed text-slate-500">服务、容器与审计数据仅保存在本机环境</p>
             </div>
           )}
-          <button type="button" onClick={onToggle} className={`hidden w-full items-center rounded-lg py-2 text-[11px] text-slate-500 transition hover:bg-white hover:text-slate-700 md:flex ${collapsed ? 'justify-center' : 'justify-between px-3'}`}>
-            {!collapsed && <span>收起导航</span>}
-            {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-          </button>
         </div>
       </aside>
     </>
