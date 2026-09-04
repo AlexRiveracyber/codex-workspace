@@ -55,7 +55,7 @@
 .ai-brand-mark {
   width: 38px !important;
   height: 38px !important;
-  border-radius: 12px !important;
+  border-radius: 16px !important;
   color: var(--ai-ink) !important;
   border: 0 !important;
   background: var(--ai-lime) !important;

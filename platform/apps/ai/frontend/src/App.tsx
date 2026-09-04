@@ -305,24 +305,22 @@ export const App: React.FC = () => {
       {/* Top Navbar */}
       <header className="ai-topbar h-14 border-b border-slate-200 bg-white/95 backdrop-blur-md px-4 flex items-center justify-between sticky top-0 z-40 shrink-0 shadow-xs">
         <div className="flex items-center gap-3">
-          {activeNavTab === 'chat' && (
-            <button
-              onClick={toggleSidebar}
-              title={sidebarCollapsed ? '展开会话列表' : '收起会话列表 (Alt+B)'}
-              className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 transition cursor-pointer"
-            >
-              {sidebarCollapsed ? (
-                <PanelLeftOpen className="w-4 h-4 text-blue-600" />
-              ) : (
-                <PanelLeftClose className="w-4 h-4 text-blue-600" />
-              )}
-            </button>
-          )}
-
           <div className="ai-wordmark flex items-center gap-2.5">
-            <div className="ai-brand-mark w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 font-bold shadow-xs">
-              <Sparkles className="w-4 h-4" />
-            </div>
+            <button
+              type="button"
+              onClick={activeNavTab === 'chat' ? toggleSidebar : undefined}
+              title={activeNavTab === 'chat' ? (sidebarCollapsed ? '展开会话记录' : '收起会话记录') : 'Lumen AI'}
+              aria-label={activeNavTab === 'chat' ? (sidebarCollapsed ? '展开会话记录' : '收起会话记录') : 'Lumen AI'}
+              aria-expanded={activeNavTab === 'chat' ? !sidebarCollapsed : undefined}
+              className={`ai-brand-mark relative w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 font-bold shadow-xs ${activeNavTab === 'chat' ? 'group cursor-pointer' : 'cursor-default'}`}
+            >
+              <span className="absolute inset-0 flex items-center justify-center opacity-100 transition-all duration-150 ease-out group-hover:scale-90 group-hover:opacity-0">
+                <Sparkles className="w-4 h-4" />
+              </span>
+              <span className="absolute inset-0 flex scale-75 items-center justify-center opacity-0 transition-all duration-150 ease-out group-hover:scale-100 group-hover:opacity-100">
+                {sidebarCollapsed ? <PanelLeftOpen className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
+              </span>
+            </button>
             <div>
               <div className="ai-eyebrow">PLATFORM / INTELLIGENCE</div>
               <div className="flex items-center gap-2">
@@ -401,22 +399,12 @@ export const App: React.FC = () => {
         {activeNavTab === 'chat' && (
           <div className="ai-chat-layout flex-1 flex gap-3 md:gap-4 w-full h-[calc(100vh-5rem)]">
             {/* Collapsible Left Conversations Sidebar */}
-            <aside
-              className={`ai-thread-rail border border-slate-200 bg-white rounded-xl p-3 flex flex-col justify-between transition-all duration-200 shrink-0 select-none overflow-hidden shadow-xs ${
-                sidebarCollapsed ? 'w-14 items-center px-1.5' : 'w-64'
-              }`}
-            >
+            {!sidebarCollapsed && <aside className="ai-thread-rail w-64 border border-slate-200 bg-white rounded-xl p-3 flex flex-col justify-between transition-all duration-200 shrink-0 select-none overflow-hidden shadow-xs">
               <div className="space-y-3 flex-1 flex flex-col min-h-0 w-full">
-                <button
-                  onClick={handleCreateConversation}
-                  className={`w-full flex items-center justify-center gap-2 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-xs transition cursor-pointer shrink-0 ${
-                    sidebarCollapsed ? 'px-1' : ''
-                  }`}
-                  title="新建会话"
-                >
-                  <Plus className="w-4 h-4" />
-                  {!sidebarCollapsed && <span>新建会话</span>}
-                </button>
+                <div className="flex items-center justify-between px-1">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">会话记录</span>
+                  <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-500">{conversations.length}</span>
+                </div>
 
                 <div className="flex-1 overflow-y-auto space-y-1 pr-1">
                   {conversations.map((conv) => {
@@ -429,8 +417,7 @@ export const App: React.FC = () => {
                           isSelected
                             ? 'bg-blue-50 text-blue-700 border-blue-200 shadow-xs font-semibold'
                             : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border-transparent'
-                        } ${sidebarCollapsed ? 'justify-center' : ''}`}
-                        title={sidebarCollapsed ? conv.title : undefined}
+                        }`}
                       >
                         <div className="min-w-0 flex-1 flex items-center gap-2">
                           <MessageSquare
@@ -438,26 +425,24 @@ export const App: React.FC = () => {
                               isSelected ? 'text-blue-600' : 'text-slate-400'
                             }`}
                           />
-                          {!sidebarCollapsed && <div className="truncate font-medium">{conv.title}</div>}
+                          <div className="truncate font-medium">{conv.title}</div>
                         </div>
 
-                        {!sidebarCollapsed && (
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteConversation(conv.id);
-                            }}
-                            className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-rose-600 transition cursor-pointer"
-                          >
-                            <Trash2 className="w-3 h-3" />
-                          </button>
-                        )}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteConversation(conv.id);
+                          }}
+                          className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-rose-600 transition cursor-pointer"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                        </button>
                       </div>
                     );
                   })}
                 </div>
               </div>
-            </aside>
+            </aside>}
 
             {/* Chat Messages + Top-Left Model Selector Workspace */}
             <main className="ai-conversation flex-1 bg-white rounded-xl flex flex-col border border-slate-200 shadow-xs overflow-hidden">
@@ -595,6 +580,14 @@ export const App: React.FC = () => {
 
                 {/* Right Quick Controls */}
                 <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleCreateConversation}
+                    className="px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs border border-indigo-100 transition cursor-pointer flex items-center gap-1 font-semibold"
+                    title="新建会话"
+                  >
+                    <Plus className="w-3 h-3" />
+                    <span>新会话</span>
+                  </button>
                   <button
                     onClick={() => setMessages([])}
                     className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs border border-slate-200 transition cursor-pointer flex items-center gap-1 font-medium"
