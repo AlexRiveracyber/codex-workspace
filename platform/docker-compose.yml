@@ -1,8 +1,10 @@
+name: codex-workspace
+
 services:
   # 1. MySQL 8.4 Database Container
   platform-mysql:
     image: mysql:8.4
-    container_name: platform-mysql
+    container_name: codex-workspace-mysql
     restart: unless-stopped
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
@@ -27,7 +29,7 @@ services:
       context: ./apps/platform/backend
       dockerfile: Dockerfile
     image: platform-api:local
-    container_name: platform-platform-api
+    container_name: codex-workspace-platform-api
     restart: unless-stopped
     depends_on:
       platform-mysql:
@@ -52,7 +54,7 @@ services:
       context: ./apps/platform/frontend
       dockerfile: Dockerfile
     image: platform-ui:local
-    container_name: platform-platform-ui
+    container_name: codex-workspace-platform-ui
     restart: unless-stopped
     depends_on:
       - platform-api
@@ -67,7 +69,7 @@ services:
       context: ./apps/task/backend
       dockerfile: Dockerfile
     image: platform-task-api:local
-    container_name: platform-task-api
+    container_name: codex-workspace-task-api
     restart: unless-stopped
     depends_on:
       platform-mysql:
@@ -89,7 +91,7 @@ services:
       context: ./apps/task/frontend
       dockerfile: Dockerfile
     image: platform-task-ui:local
-    container_name: platform-task-ui
+    container_name: codex-workspace-task-ui
     restart: unless-stopped
     depends_on:
       - platform-task-api
@@ -104,7 +106,7 @@ services:
       context: ./apps/ai/backend
       dockerfile: Dockerfile
     image: platform-ai-api:local
-    container_name: platform-ai-api
+    container_name: codex-workspace-ai-api
     restart: unless-stopped
     depends_on:
       platform-mysql:
@@ -126,7 +128,7 @@ services:
       context: ./apps/ai/frontend
       dockerfile: Dockerfile
     image: platform-ai-ui:local
-    container_name: platform-ai-ui
+    container_name: codex-workspace-ai-ui
     restart: unless-stopped
     depends_on:
       - platform-ai-api
@@ -141,7 +143,7 @@ services:
       context: ./apps/tool/backend
       dockerfile: Dockerfile
     image: platform-tool-api:local
-    container_name: platform-tool-api
+    container_name: codex-workspace-tool-api
     restart: unless-stopped
     depends_on:
       platform-mysql:
@@ -163,7 +165,7 @@ services:
       context: ./apps/tool/frontend
       dockerfile: Dockerfile
     image: platform-tool-ui:local
-    container_name: platform-tool-ui
+    container_name: codex-workspace-tool-ui
     restart: unless-stopped
     depends_on:
       - platform-tool-api
@@ -172,8 +174,41 @@ services:
     networks:
       - platform-network
 
+  # 10. Document Center Backend (local read-only document library)
+  platform-document-api:
+    build:
+      context: ./apps/document/backend
+      dockerfile: Dockerfile
+    image: platform-document-api:local
+    container_name: codex-workspace-document-api
+    restart: unless-stopped
+    environment:
+      DOCUMENT_LIBRARY_PATH: /documents
+    volumes:
+      - ${DOCUMENT_LIBRARY_PATH:-./documents}:/documents:ro
+    ports:
+      - "${DOCUMENT_API_PORT:-8085}:8085"
+    networks:
+      - platform-network
+
+  # 11. Document Center Frontend
+  platform-document-ui:
+    build:
+      context: ./apps/document/frontend
+      dockerfile: Dockerfile
+    image: platform-document-ui:local
+    container_name: codex-workspace-document-ui
+    restart: unless-stopped
+    depends_on:
+      - platform-document-api
+    ports:
+      - "${DOCUMENT_UI_PORT:-3005}:80"
+    networks:
+      - platform-network
+
 volumes:
   platform-mysql-data:
+    name: platform_platform-mysql-data
 
 networks:
   platform-network:

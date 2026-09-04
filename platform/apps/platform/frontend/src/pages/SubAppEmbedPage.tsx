@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, CheckSquare, Sparkles, Wrench, RefreshCw } from 'lucide-react';
+import { ExternalLink, CheckSquare, Sparkles, Wrench, RefreshCw, BookOpen } from 'lucide-react';
 
 interface SubAppConfig {
   name: string;
@@ -11,7 +11,7 @@ interface SubAppConfig {
 }
 
 interface SubAppEmbedPageProps {
-  appType: 'task' | 'ai' | 'tool';
+  appType: 'task' | 'ai' | 'tool' | 'document';
 }
 
 export const SubAppEmbedPage: React.FC<SubAppEmbedPageProps> = ({ appType }) => {
@@ -39,6 +39,14 @@ export const SubAppEmbedPage: React.FC<SubAppEmbedPageProps> = ({ appType }) => 
       url: 'http://localhost:3004',
       icon: Wrench,
       accentColor: 'text-indigo-400',
+    },
+    document: {
+      name: 'Document Center',
+      subTitle: 'apps/document (Port 3005)',
+      desc: '本地文档扫描、检索与预览中心',
+      url: 'http://localhost:3005',
+      icon: BookOpen,
+      accentColor: 'text-amber-500',
     },
   };
 

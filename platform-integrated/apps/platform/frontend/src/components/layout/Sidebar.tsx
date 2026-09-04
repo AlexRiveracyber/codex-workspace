@@ -29,7 +29,7 @@ const mainNav: NavItem[] = [
   { to: '/templates', label: '模板市场', icon: Store },
 ];
 const subAppNav: NavItem[] = [
-  { to: '/documents', label: '文档中心', icon: BookOpen, accent: 'bg-amber-300' },
+  { to: '/subapps/document', label: 'Document Center', icon: BookOpen, accent: 'bg-amber-300', route: '/document/' },
   { to: '/subapps/task', label: 'Task Flow', icon: CheckSquare2, accent: 'bg-rose-300', route: '/task/' },
   { to: '/subapps/ai', label: 'Lumen AI', icon: Sparkles, accent: 'bg-indigo-300', route: '/ai/' },
   { to: '/subapps/tool', label: 'DevTools', icon: Wrench, accent: 'bg-emerald-300', route: '/tool/' },
