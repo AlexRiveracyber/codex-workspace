@@ -85,6 +85,26 @@
   background: #e9edf1;
 }
 
+.word-render-shell,
+.docx-preview-host {
+  min-height: 100%;
+}
+
+.docx-preview-host.hidden {
+  display: none;
+}
+
+.docx-preview-host .docx-wrapper {
+  min-height: 100%;
+  padding: 24px;
+  background: transparent;
+}
+
+.docx-preview-host section.docx-page {
+  margin: 0 auto 24px;
+  box-shadow: 0 5px 20px rgba(28, 45, 57, .12);
+}
+
 .word-preview {
   width: min(1100px, 100%);
   min-height: 100%;
