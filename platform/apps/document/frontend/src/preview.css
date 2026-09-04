@@ -115,9 +115,14 @@
 }
 
 .word-state {
-  margin: auto;
+  display: grid;
+  min-height: 100%;
+  padding: 32px;
+  place-items: center;
   color: #7f8b9b;
   font-size: 12px;
+  line-height: 1.8;
+  text-align: center;
 }
 
 .canvas.image-canvas canvas {
