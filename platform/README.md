@@ -24,6 +24,8 @@
   - 独立的 `apps/ai`（Java 后端 + Vue 前端），支持接入汇付天下 (Huifu) 等 AI 统一网关，管理千问、DeepSeek、万相、HappyHorse 等 29 款大模型，提供一体化智能会话、深度推理思考链、图片生成与全功能查看器（放大/缩小/旋转/下载）、视频生成与播放器、调用审计等能力。
 - 🛠️ **全能开发者工具箱子应用 (Toolbox)**：
   - 独立的 `apps/tool`（Java 后端 + Vue 前端），集成 30+ 款日常高频研发工具：Base64/URL/JWT/多进制/Unicode编码转换、MD5/SHA/SM3/AES/SM4/RSA加解密与签名、强密码/UUID/雪花ID生成、JSON格式化/转Java/TypeScript、SQL DDL转实体类、Cron表达式解析与执行预测、轻量HTTP调试、端口探活、CIDR计算、代码Diff对比、正则测试、命名法转换、拾色器与二维码生成、速查表与代码片段管理。
+- 🧠 **Arc Code 桌面编码 Agent**：
+  - 位于同级目录 `../codex-studio` 的独立桌面应用（Electron + React），通过本地 Codex App Server 提供项目选择、流式会话、任务恢复、工具审批、Git diff 和工作区沙箱。
 
 ---
 
@@ -126,6 +128,14 @@ docker compose up -d --build
    npm run dev
    ```
    前端本地开发地址为：`http://localhost:3000`。
+
+4. **启动 Arc Code 桌面应用（可选）**：
+   ```powershell
+   cd ../codex-studio
+   npm install
+   npm run dev
+   ```
+   需要预先安装并登录可从终端执行的 `codex` CLI。桌面应用与 `platform` 同级，完整说明和验证命令见 [`codex-studio/README.md`](../codex-studio/README.md)。
 
 ---
 
